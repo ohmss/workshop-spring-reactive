@@ -20,7 +20,7 @@ tasks:
     command: |
       . setup.sh
       java -jar target/spring-petclinic-reactive-1.0.0-SNAPSHOT.jar 
-
+      
 ports:
   - port: 4200
     onOpen: open-browser 

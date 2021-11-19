@@ -5,11 +5,11 @@
 
 This sample is a fully reactive version of the Spring PetClinic application using Spring WebFlux.
 
-![image](https://raw.githubusercontent.com/clun/spring-petclinic-reactive/master/doc/img/ui-top.png)
+![image](doc/img/ui-top.png?raw=true)
 
 The steps to run the application are provided below. You can run the application with no installation using Gitpod and Cassandra as DBaas for free or locally. To get started with a free-forever, zero-install Cassandra database **[click here](https://astra.datastax.com/register?utm_source=github&utm_medium=referral&utm_campaign=spring-petclinic-reactive)** 🚀
 
-![Pet Clinic Welcome Screen](https://raw.githubusercontent.com/clun/spring-petclinic-reactive/master/doc/img/logical-architecture.png)
+![Pet Clinic Welcome Screen](doc/img/logical-architecture.png?raw=true)
 *Architecture overview*
 
 ## Table of contents
@@ -22,13 +22,13 @@ The steps to run the application are provided below. You can run the application
 
 ### 1. Start the database
 
-**✅ Create an free-forever Cassandra database with DataStax Astra**: [click here to get started](https://astra.datastax.com/register?utm_source=github&utm_medium=referral&utm_campaign=spring-petclinic-reactive) 🚀
+**✅ Create a free-forever Cassandra database with DataStax Astra**: [click here to get started](https://astra.datastax.com/register?utm_source=github&utm_medium=referral&utm_campaign=spring-petclinic-reactive) 🚀
 
 
 ![Astra Registration Screen](doc/img/db-auth.png?raw=true)
 
 
-**✅ Use the form to create new database**
+**✅ Use the form to create a new database**
 
 On the Astra home page locate the **Add Database** button
 
@@ -42,7 +42,7 @@ Select the proper region and click the `configure` button. The number of regions
 
 ![Astra Database Creation Form](doc/img/db-creation-3.png?raw=true)
 
-Fill the `database name`, `keyspace name`, `username` and `password`. *Please remember your password as you will be asked to provide it when application start the first time.*
+Fill in the `database name`, `keyspace name`, `username` and `password`. *Please remember your password as you will be asked to provide it when the application starts the first time.*
 
 ![Astra Database Creation Form](doc/img/db-creation-4.png?raw=true)
 
@@ -56,7 +56,7 @@ View your database. It may take 2-3 minutes for your database to spin up. You wi
 
 ![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/dashboard-pending-1000.png?raw=true)
 
-Once the database is ready, notice how the status changes from `pending` to `Active` and Astra enables the **connect** button.
+Once the database is ready, notice how the status changes from `Pending` to `Active` and Astra enables the **CONNECT** button.
 
 ![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/dashboard-withdb-1000.png?raw=true)
 
@@ -64,25 +64,25 @@ Once the database is ready, notice how the status changes from `pending` to `Act
 
 **✅ Navigate to your credentials**
 
-Locate the combo `Organization: <Your email>` on the top navigation. On the right side of your organization, click the elipsis (...) then click your `<Your email>`.
+Locate the combo `Organization: <Your email>` on the top navigation. On the right side of your organization, click the ellipsis (...) then click your `<Your email>`.
 
 ![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/organization-combo-1000.png?raw=true)
 
-You should land to the following screen. Scroll down to the bottom of the page to locate the `Service Account` in `Security Settings`
+You should land on the following screen. Scroll down to the bottom of the page to locate the `Service Account` in `Security Settings`
 
 ![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/organization-home-1000.png?raw=true)
 
 **✅ Create Service Account**
 
+
 Create a service account by clicking `Add Service Account` button above the section as shown below
-
 ![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/security-settings-annotated.png?raw=true)
-
 When panel open on the right, click `Add` 
 
 ![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/security-add-org-annotated.png?raw=true)
 
 **✅ Copy credentials to your clipboard**
+
 
 Click the ellipsis at end of Service Account row to open menu as select `Copy Credentials`
 
@@ -101,7 +101,7 @@ The credentials you copied to the clipboard look like the following JSON, we wil
 
 **✅ Open Gitpod (with creds copied to clipboard)**
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/Datastax-Academy/workshop-spring-reactive)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datastaxdevs/workshop-spring-reactive)
 
 When you first launch gitpod, it builds the image.
 ![image](doc/img/building-workspace.png?raw=true)
@@ -109,11 +109,9 @@ When you first launch gitpod, it builds the image.
 Git pod pulls the image.
 ![image](doc/img/pulling-image.png?raw=true)
 
-
-
 **✅ Paste credentials in Gitpod terminal**
 
-Once your Gitpod loads the workspace, you'll be asked to paste your service account credentials in the Gitpod terminal at the bottom of the screen. The [setup.sh](setup.sh) script at the root of the repository is what asks this question.
+Once Gitpod loads the workspace, you'll be asked to paste your service account credentials in the Gitpod terminal at the bottom of the screen. The [setup.sh](setup.sh) script at the root of the repository is what asks this question.
 
 ![image](doc/img/script-copy-creds.png?raw=true)
 
@@ -136,7 +134,6 @@ You may have noticed another terminal named `spring-petclinic-angular`. This is 
 ![image](doc/img/start-ui.png?raw=true)
 
 After answering the question about analytics usage, you should be able to access the UI on a new tab.
-
 
 ![Pet Clinic Welcome Screen](doc/img/ui-top.png?raw=true)
 
@@ -203,7 +200,6 @@ To start zipkin use `docker-compose up -d`
 - `DataStax Astra` : Apache Cassandra available in the Cloud for free as a managed service (DBaas)
 
 
-
 ### Data Model diagram
 
 The underlying data model implemented in Apache Cassandra is different from the one you would have defined with a relational database.
@@ -221,5 +217,4 @@ The application generates the objects related to the data model (e.g., tables, i
 
 For pull requests, editor preferences are available in the editor config for easy use in common text editors. Read more and download plugins at http://editorconfig.org.
 
-
-![banner](https://raw.githubusercontent.com/clun/spring-petclinic-reactive/master/doc/img/banner.png)
+![banner](doc/img/banner.png?raw=true)
