@@ -41,10 +41,13 @@ This sample is a fully reactive version of the Spring PetClinic application usin
 * *Understand what are the benefit a **Reactive Programming*** 
 * ***Get a working full stack application Spring Boot-Data-Reactive***
 
+[🏠 Back to Table of Contents](#clipboard-table-of-content)
+
 ## 2. Frequently asked questions
 <p/>
 <details>
 <summary><b> 1️⃣ Can I run the workshop on my computer?</b></summary>
+<hr>
 <p>There is nothing preventing you from running the workshop on your own machine, If you do so, you will need the following
 <ol>
 <li><b>git</b> installed on your local system
@@ -58,6 +61,7 @@ In this readme, we try to provide instructions for local development as well - b
 <p/>
 <details>
 <summary><b> 2️⃣ What other prerequisites are there?</b></summary>
+<hr>
 <ul>
 <li>You will need a GitHub account
 <li>You will also need an Astra account: don't worry, we'll work through that in the following
@@ -67,14 +71,18 @@ In this readme, we try to provide instructions for local development as well - b
 <p/>
 <details>
 <summary><b> 3️⃣ Do I need to pay for anything for this workshop?</b></summary>
+<hr>
 <b>No.</b> All tools and services we provide here are FREE.
 </details>
 <p/>
 <details>
 <summary><b> 4️⃣ Will I get a certificate if I attend this workshop?</b></summary>
+<hr>
 Attending the session is not enough. You need to complete the homeworks detailed below and you will get a nice badge.
 </details>
 <p/>
+
+[🏠 Back to Table of Contents](#clipboard-table-of-content)
 
 ## 3. Materials for the Session
 
@@ -84,6 +92,8 @@ we have you covered. In this repository, you'll find everything you need for thi
 - [Slide deck](doc/slides.pdf)
 - [Datastax Developers Discord chat](https://bit.ly/cassandra-workshop)
 - [Questions and Answers](https://community.datastax.com/)
+
+[🏠 Back to Table of Contents](#clipboard-table-of-content)
 
 
 ## 4. Create Astra DB Instance
