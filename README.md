@@ -1,22 +1,86 @@
+<!--- STARTEXCLUDE --->
 # Reactive Implementation of 🐈 Spring PetClinic 🐕
-*15 minutes, Intermediate*
 
 
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/datastaxdevs/workshop-streaming-game)
+[![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
+[![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
+
+
+*50 minutes, Intermediate, [Start Building](https://github.com/DataStax-Examples/spring-petclinic-reactive#prerequisites)*
+
+![banner](doc/img/banner.png?raw=true)
 
 This sample is a fully reactive version of the Spring PetClinic application using Spring WebFlux.
+<!--- ENDEXCLUDE --->
 
 ![image](doc/img/ui-top.png?raw=true)
 
-The steps to run the application are provided below. You can run the application with no installation using Gitpod and Cassandra as DBaas for free or locally. To get started with a free-forever, zero-install Cassandra database **[click here](https://astra.datastax.com/register?utm_source=github&utm_medium=referral&utm_campaign=spring-petclinic-reactive)** 🚀
+## :clipboard: Table of content
 
-![Pet Clinic Welcome Screen](doc/img/logical-architecture.png?raw=true)
-*Architecture overview*
+1. [Objectives](#1-objectives)
+2. [Frequently asked questions](#1-objectives)
+3. [Materials for the Session](#1-objectives)
+4. [Hands-on - Create your Database](#1-objectives)
+5. [Hands-on - Work with Drivers](#1-objectives)
+6. [Hands-on - Work with Spring](#1-objectives)
+7. [Hands-on - User Interface](#1-objectives)
+8. [Homeworks](#1-objectives)
 
-## Table of contents
 
-- [Run the application](#run-the-application)
-- [Understand the architecture](#understand-the-architecture)
-- [Contributing](#contributing)
+## 1. Objectives
+
+* *Learn how Apache Cassandra **data modelling** is different from relational*
+* *Understand how **Java Applications** connect to Apache Cassandra™*
+* *Learn about **Spring and Spring Boot** Microservices*
+* *Understand what are the benefit a **Reactive Programming*** 
+* ***Get a working full stack application Spring Boot-Data-Reactive***
+
+
+## 2. Frequently asked questions
+<p/>
+<details>
+<summary><b>1. Can I run the workshop on my computer?</b></summary>
+<p>There is nothing preventing you from running the workshop on your own machine, If you do so, you will need the following
+<ol>
+<li><b>git</b> installed on your local system
+<li><b>JDK 8+</b> installed on your local system
+<li><b>Maven 3.6+</b> installed on your local system
+<li><a href="https://www.whitesourcesoftware.com/free-developer-tools/blog/update-node-js/" >Node 15 and npm 7 or later</a>
+</ol>
+</p>
+In this readme, we try to provide instructions for local development as well - but keep in mind that the main focus is development on Gitpod, hence **We can't guarantee live support** about local development in order to keep on track with the schedule. However, we will do our best to give you the info you need to succeed.
+</details>
+<p/>
+<details>
+<summary><b>2. What other prerequisites are there?</b></summary>
+<ul>
+<li>You will need a GitHub account
+<li>You will also need an Astra account: don't worry, we'll work through that in the following
+</ul>
+</p>
+</details>
+<p/>
+<details>
+<summary><b>3. Do I need to pay for anything for this workshop?</b></summary>
+<b>No.</b> All tools and services we provide here are FREE.
+</details>
+<p/>
+<details>
+<summary><b>4. Will I get a certificate if I attend this workshop?</b></summary>
+Attending the session is not enough. You need to complete the homeworks detailed below and you will get a nice badge.
+</details>
+<p/>
+
+## 3. Materials for the Session
+
+It doesn't matter if you join our workshop live or you prefer to work at your own pace,
+we have you covered. In this repository, you'll find everything you need for this workshop:
+
+- [Slide deck](slides/DataStaxDevs-workshop-Build_a_Multiplayer_Game_with_Streaming.pdf)
+- [Discord chat](https://bit.ly/cassandra-workshop)
+- [Questions and Answers](https://community.datastax.com/)
+
 
 ## Run the application
 
@@ -211,10 +275,16 @@ We also created some `secondary indices` to queries columns that are not the PAR
 
 The application generates the objects related to the data model (e.g., tables, indices, udts) at startup.
 
-## C. Contributing
+## Homework
 
- The [issue tracker](https://github.com/spring-petclinic/spring-petclinic-reactive/issues)is the preferred channel for bug reports, features requests and submitting pull requests.
+<img src="images/streaming-workshop.png?raw=true" width="200" align="right" />
 
-For pull requests, editor preferences are available in the editor config for easy use in common text editors. Read more and download plugins at http://editorconfig.org.
+Don't forget to complete your assignment and get your verified skill badge! Finish and submit your homework!
 
-![banner](doc/img/banner.png?raw=true)
+1. Complete the practice steps as described below until you have your own app running in Gitpod.
+2. Now roll up your sleeves and modify the code in two ways: (1) we want the API to send a greeting to each new player in the chat box, and (2) we want the player names in the game area to match the icon color. _Please read the detailed guidance found [below](#6-homework-instructions)_.
+3. Take a SCREENSHOT of the running app modified this way. _Note: you will have to restart the API and reload the client to see all changes!_
+4. Submit your homework [here](https://dtsx.io/streaming-game-homework).
+
+That's it, you are done! Expect an email in a few days!
+
