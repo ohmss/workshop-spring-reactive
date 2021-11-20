@@ -20,8 +20,11 @@ This sample is a fully reactive version of the Spring PetClinic application usin
 
 1. [Objectives](#1-objectives)
 2. [Frequently asked questions](#1-objectives)
-3. [Materials for the Session](#1-objectives)
-4. [Hands-on - Create your Database](#1-objectives)
+3. [Materials for the Session](#2-frequently-asked-questions)
+4. [Create your Database](#3-materials-for-the-session)
+5. [Create your Schema](#3-materials-for-the-session)
+6. [Create your Token](#3-materials-for-the-session)
+
 5. [Hands-on - Work with Drivers](#1-objectives)
 6. [Hands-on - Work with Spring](#1-objectives)
 7. [Hands-on - User Interface](#1-objectives)
@@ -36,11 +39,10 @@ This sample is a fully reactive version of the Spring PetClinic application usin
 * *Understand what are the benefit a **Reactive Programming*** 
 * ***Get a working full stack application Spring Boot-Data-Reactive***
 
-
 ## 2. Frequently asked questions
 <p/>
 <details>
-<summary><b>1. Can I run the workshop on my computer?</b></summary>
+<summary><b> 1️⃣ Can I run the workshop on my computer?</b></summary>
 <p>There is nothing preventing you from running the workshop on your own machine, If you do so, you will need the following
 <ol>
 <li><b>git</b> installed on your local system
@@ -53,7 +55,7 @@ In this readme, we try to provide instructions for local development as well - b
 </details>
 <p/>
 <details>
-<summary><b>2. What other prerequisites are there?</b></summary>
+<summary><b> 2️⃣ What other prerequisites are there?</b></summary>
 <ul>
 <li>You will need a GitHub account
 <li>You will also need an Astra account: don't worry, we'll work through that in the following
@@ -62,12 +64,12 @@ In this readme, we try to provide instructions for local development as well - b
 </details>
 <p/>
 <details>
-<summary><b>3. Do I need to pay for anything for this workshop?</b></summary>
+<summary><b> 3️⃣ Do I need to pay for anything for this workshop?</b></summary>
 <b>No.</b> All tools and services we provide here are FREE.
 </details>
 <p/>
 <details>
-<summary><b>4. Will I get a certificate if I attend this workshop?</b></summary>
+<summary><b> 4️⃣ Will I get a certificate if I attend this workshop?</b></summary>
 Attending the session is not enough. You need to complete the homeworks detailed below and you will get a nice badge.
 </details>
 <p/>
@@ -77,89 +79,195 @@ Attending the session is not enough. You need to complete the homeworks detailed
 It doesn't matter if you join our workshop live or you prefer to work at your own pace,
 we have you covered. In this repository, you'll find everything you need for this workshop:
 
-- [Slide deck](slides/DataStaxDevs-workshop-Build_a_Multiplayer_Game_with_Streaming.pdf)
-- [Discord chat](https://bit.ly/cassandra-workshop)
+- [Slide deck](doc/slides.pdf)
+- [Datastax Developers Discord chat](https://bit.ly/cassandra-workshop)
 - [Questions and Answers](https://community.datastax.com/)
 
 
-## Run the application
+## 4. Create Astra DB Instance
 
-### 1. Start the database
+**`ASTRA DB`** is the simplest way to run Cassandra with zero operations at all - just push the button and get your cluster. No credit card required, $25.00 USD credit every month, roughly 5M writes, 30M reads, 40GB storage monthly - sufficient to run small production workloads.
 
-**✅ Create a free-forever Cassandra database with DataStax Astra**: [click here to get started](https://astra.datastax.com/register?utm_source=github&utm_medium=referral&utm_campaign=spring-petclinic-reactive) 🚀
+#### ✅ Step 4a. 
 
+If you do have an account yet register and sign In to Astra DB this is FREE and NO CREDIT CARD asked** [https://astra.datastax.com](https://astra.dev/11-22): You can use your `Github`, `Google` accounts or register with an `email`.
 
-![Astra Registration Screen](doc/img/db-auth.png?raw=true)
+_Make sure to chose a password with minimum 8 characters, containing upper and lowercase letters, at least one number and special character_
 
+#### ✅ Step 4b. Create a "FREE" plan
 
-**✅ Use the form to create a new database**
+Follow this [guide](https://docs.datastax.com/en/astra/docs/creating-your-astra-database.html), to set up a pay as you go database with a free $25 monthly credit. You will find below recommended values to enter:
 
-On the Astra home page locate the **Add Database** button
+- **For the database name** - `workshops`
 
-![Astra Database Creation Form](doc/img/db-creation-1.png?raw=true)
+- **For the keyspace name** - `spring_petclinic`
 
-Select the **free tier** plan, this is a true free tier, free forever and no payment method asked 🎉 🎉
+_You can technically use whatever you want and update the code to reflect the keyspace. This is really to get you on a happy path for the first run._
 
-![Astra Database Creation Form](doc/img/db-creation-2.png?raw=true)
+- **For provider and region**: Choose a provider (GCP, Azure or AWS) and then the related region is where your database will reside physically (choose one close to you or your users).
 
-Select the proper region and click the `configure` button. The number of regions and cloud providers are limited in the free tier but please notice you can run the DB on any cloud with any VPC Peering.
+- **Create the database**. Review all the fields to make sure they are as shown, and click the `Create Database` button.
 
-![Astra Database Creation Form](doc/img/db-creation-3.png?raw=true)
+You will see your new database `pending` in the Dashboard.
 
-Fill in the `database name`, `keyspace name`, `username` and `password`. *Please remember your password as you will be asked to provide it when the application starts the first time.*
+![my-pic](doc/img//db-pending.png?raw=true)
 
-![Astra Database Creation Form](doc/img/db-creation-4.png?raw=true)
+The status will change to `Active` when the database is ready, this will only take 2-3 minutes. You will also receive an email when it is ready.
 
-**✅ View your Database and connect**
+**👁️ Walkthrough**
 
-View your database. It may take 2-3 minutes for your database to spin up. You will receive an email at that point.
+*The Walkthrough mentionned the wrong keyspace, make sure to use `spring_petclinic`*
 
-**👁️ Expected output**
-
-*Initializing*
-
-![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/dashboard-pending-1000.png?raw=true)
-
-Once the database is ready, notice how the status changes from `Pending` to `Active` and Astra enables the **CONNECT** button.
-
-![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/dashboard-withdb-1000.png?raw=true)
-
-### 2. Copy credentials to connect
-
-**✅ Navigate to your credentials**
-
-Locate the combo `Organization: <Your email>` on the top navigation. On the right side of your organization, click the ellipsis (...) then click your `<Your email>`.
-
-![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/organization-combo-1000.png?raw=true)
-
-You should land on the following screen. Scroll down to the bottom of the page to locate the `Service Account` in `Security Settings`
-
-![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/organization-home-1000.png?raw=true)
-
-**✅ Create Service Account**
+![image](doc/img/astra-create-db.gif?raw=true)
 
 
-Create a service account by clicking `Add Service Account` button above the section as shown below
-![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/security-settings-annotated.png?raw=true)
-When panel open on the right, click `Add` 
+## 5. Create your schema with CQL Console
 
-![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/security-add-org-annotated.png?raw=true)
+#### ✅ 5a. Open CqlConsole and select your Keyspace
 
-**✅ Copy credentials to your clipboard**
+As seen in the slides on the contrary of relational you start with the request and data model BEFORE CODING.
 
+![image](doc/img/db-cqlconsole-1.png?raw=true)
 
-Click the ellipsis at end of Service Account row to open menu as select `Copy Credentials`
+ Let's create the tables. In the console use the command:
 
-![my-pic](https://github.com/datastaxdevs/shared-assets/blob/master/astra/organization-copycredentials-1000.png?raw=true)
-
-The credentials you copied to the clipboard look like the following JSON, we will use it in gitpod to enable connectivity.
-```json
-{
-  "clientId":"149de2c7-9b07-41b3-91ad-9453dee4dc54",
-  "clientName":"cedrick.lunven@datastax.com",
-  "clientSecret":"aaaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
-}
+```sql
+use spring_petclinic;
 ```
+
+![image](doc/img/db-cqlconsole-2.png?raw=true)
+
+#### ✅ 5b. Create tables
+
+This is the data model we are looking for with 6 tables.
+
+![Pet Clinic Welcome Screen](doc/img/data-model.png?raw=true)
+
+Execute the following in the cql console
+
+```sql
+DROP INDEX IF EXISTS petclinic_idx_vetname;
+DROP INDEX IF EXISTS petclinic_idx_ownername;
+DROP TABLE IF EXISTS petclinic_vet;
+DROP TABLE IF EXISTS petclinic_vet_by_specialty;
+DROP TABLE IF EXISTS petclinic_reference_lists;
+DROP TABLE IF EXISTS petclinic_owner;
+DROP TABLE IF EXISTS petclinic_pet_by_owner;
+DROP TABLE IF EXISTS petclinic_visit_by_pet;
+
+CREATE TABLE IF NOT EXISTS petclinic_vet (
+  id          uuid,
+  first_name  text,
+  last_name   text,
+  specialties set<text>,
+  PRIMARY KEY ((id))
+);
+
+
+CREATE TABLE IF NOT EXISTS petclinic_vet_by_specialty (
+ specialty   text,
+ vet_id      uuid,
+ first_name  text,
+ last_name   text,
+ PRIMARY KEY ((specialty), vet_id)
+);
+
+
+CREATE TABLE IF NOT EXISTS petclinic_owner (
+  id         uuid,
+  first_name text,
+  last_name  text,
+  address    text,
+  city       text,
+  telephone  text,
+  PRIMARY KEY ((id))
+);
+
+CREATE TABLE IF NOT EXISTS petclinic_pet_by_owner (
+  owner_id   uuid,
+  pet_id     uuid,
+  pet_type   text,
+  name       text,
+  birth_date date,
+  PRIMARY KEY ((owner_id), pet_id)
+);
+
+CREATE TABLE IF NOT EXISTS petclinic_visit_by_pet (
+   pet_id      uuid,
+   visit_id    uuid,
+   visit_date  date,
+   description text,
+   PRIMARY KEY ((pet_id), visit_id)
+);
+
+CREATE TABLE IF NOT EXISTS petclinic_reference_lists (
+  list_name text,
+  values set<text>,
+  PRIMARY KEY ((list_name))
+);
+
+/** We could search veterinarians by their names. */
+CREATE INDEX IF NOT EXISTS petclinic_idx_ownername ON petclinic_owner(last_name);
+/** We could search vet by their names. */
+CREATE INDEX IF NOT EXISTS petclinic_idx_vetname ON petclinic_vet(last_name);
+```
+
+#### ✅ 5c. Check our 6 tables
+
+```sql
+describe tables;
+```
+
+#### ✅ 5d. Insert Reference Data
+
+```sql
+INSERT INTO petclinic_reference_lists(list_name, values) 
+VALUES ('pet_type ', {'bird', 'cat', 'dog', 'lizard','hamster','snake'});
+
+INSERT INTO petclinic_reference_lists(list_name, values) 
+VALUES ('vet_specialty', {'radiology', 'dentistry', 'surgery'});
+```
+
+## 6. Create Astra Token
+
+To connect to the database from Java code we need some credentials, this is what we are doing here.
+
+#### ✅ Step 4a: Generate Token
+
+Following the [Manage Application Tokens docs](https://docs.datastax.com/en/astra/docs/manage-application-tokens.html) create a token with `Database Admnistrator` roles.
+
+- Go the `Organization Settings`
+
+- Go to `Token Management`
+
+- Pick the role `Database Admnistrator` on the select box
+
+- Click Generate token
+
+**👁️ Walkthrough**
+
+![image](doc/img/astra-create-token.gif?raw=true)
+
+This is what the token page looks like. You can now download the values as a CSV. We will need those values but you can also keep this window open for use later.
+
+![image](images/tutorials/astra-token.png?raw=true)
+
+Notice the clipboard icon at the end of each value.
+
+- `clientId:` We will use it as a _username_ to contact Cassandra
+
+- `clientSecret:` We will use it as a _password_ to contact Cassandra
+
+- `appToken:` We will use it as a api token Key to interact with APIs.
+
+To know more about roles of each token you can have a look to [this video.](https://www.youtube.com/watch?v=nRqu44W-bMU)
+
+**Note: Make sure you don't close the window accidentally or otherwise - if you close this window before you copy the values, the application token is lost forever. They won't be available later for security reasons.**
+
+We are now set with the database and credentials. Let's start coding with Spring !
+
+[🏠 Back to Table of Contents](#table-of-content)
+
 
 ### 3. Start in Gitpod
 
