@@ -25,12 +25,12 @@ This sample is a fully reactive version of the Spring PetClinic application usin
 4. [Create your Database](#4-create-astra-db-instance)
 5. [Create your Schema](#5-create-your-schema-with-cql-console)
 6. [Create your Token](#6-create-your-token)
-7. [Start Gitpod and Setup your application](#7-start-gitpod)
-8. [Setup and work with Drivers](#1-objectives)
-9. [Working with Spring](#1-objectives)
-10. [Working with user interface](#1-objectives)
-11. [Homeworks](#1-objectives)
-
+7. [Start Gitpod and setup your application](#7-start-gitpod)
+8. [Working with Cassandra Drivers](#1-objectives)
+9. [Working with Spring Data](#1-objectives)
+10. [Working with Spring WebFlux](#1-objectives)
+11. [Working with Angular UI](#1-objectives)
+12. [Homeworks](#1-objectives)
 
 ## 1. Objectives
 
@@ -423,7 +423,7 @@ mvn test -Dtest=com.datastax.workshop.petclinic.Test01_Connectivity
 workshops : id=3ed83de7-d97f-4fb6-bf9f-82e9f7eafa23, region=eu-west-1
 ```
 
-## 8. Working with DAO
+## 8. Working with Cassandra Drivers
 
 #### ✅ 8a. The CqlSession
 
@@ -433,7 +433,9 @@ The integration to Cassandra is always implemented through the `CqlSession`. A f
 mvn test -Dtest=com.datastax.workshop.petclinic.Test02_DaoWithCqlSession
 ```
 
-Notice how you need to put a terminal call `block()` or use the `StepVerifier` included in Spring Reactive.
+Notice how you need to put a terminal call `block()` or the treatment is not started.
+
+Project [Reactor](https://projectreactor.io/) is a fourth-generation reactive library, based on the Reactive Streams specification, for building non-blocking applications on the JVM. We are using the library reactor-test introducing `StepVerifier` to ease to coding of unit tests:
 
 ```java
 @Test
@@ -490,29 +492,140 @@ mvn test -Dtest=com.datastax.workshop.petclinic.Test03_DaoWithDriverObjectMappin
 
 - Define an entity [`VetEntitySpring`]() where object attributes matches the table columns. You can notice that the set of annotations is not the same as with java driver mapper.
 
+- Define an interface extending the `ReactiveCassandraRepository` named `VetRepositorySpring`
+
+```java
+@Repository
+public interface VetRepositorySpring 
+   extends ReactiveCassandraRepository<VetEntitySpring, UUID> {
+}
+```
+
+#### ✅ 9a. Execute the unit test
+
+Execute the test to work with the DAO `Test04_DaoWithSpringData`
+
+```bash
+mvn test -Dtest=com.datastax.workshop.petclinic.Test04_DaoWithSpringData
+```
+
+## 10. Working with Spring WebFlux
+
+> [Reference Documentation](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html)
+
+*The original web framework included in the Spring Framework, Spring Web MVC, was purpose-built for the Servlet API and Servlet containers. The reactive-stack web framework, Spring WebFlux, was added later in version 5.0. It is fully non-blocking, supports Reactive Streams back pressure, and runs on such servers as Netty, Undertow, and Servlet 3.1+ containers.*
+
+*Both web frameworks mirror the names of their source modules (spring-webmvc and spring-webflux) and co-exist side by side in the Spring Framework. Each module is optional. Applications can use one or the other module or, in some cases, both — for example, Spring MVC controllers with the reactive WebClient.*
+
+The different DAO we created are injected into a Rest controller. (same as Spring WEB)
+
+```java
+@RestController
+@RequestMapping("/petclinic/api/specialties")
+public class VetSpecialtyController {
+ 
+ @Autowired
+ ReferenceListReactiveDao dao;
+
+ @GetMapping(produces = APPLICATION_JSON_VALUE)
+ public Mono<ResponseEntity<Set<VetSpecialty>>> getAllVetsSpecialties() {
+   return refDao.findReferenceList("vet_specialty")
+    .map(Set::stream)
+    .map(s -> s.map(VetSpecialty::new)
+    .collect(Collectors.toSet()))
+    .map(ResponseEntity::ok);
+ }
+}
+```
+
+#### ✅ 10a. Execute the unit test
+
+```bash
+mvn test -Dtest=com.datastax.workshop.petclinic.Test05_ApiController
+```
+
+#### ✅ 10b. Start the application with Swagger UI
+
+We also used SpringDOC to generate a Swagger UI interface. For more information check the class [`ApiDocumentationConfig`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/main/java/com/datastax/workshop/petclinic/conf/ApiDocumentationConfig.java)
+
+```java
+@RestController
+@RequestMapping("/petclinic/api/specialties")
+@Api(value="/petclinic/api/specialties", tags = {"Veterinarian Specialties Api"})
+public class VetSpecialtyController {
+  //...
+}
+```
+
+You can now go ahead and start the application. The application is listening on port `9966` as defined in `application.yaml` *(Please do not change this, this is waht the user interface is looking for)*
 
 
+Start the application;
+```bash
+mvn spring-boot:run
+```
+
+Open your browser on port `9966` using the the remote explorer or entering in a new terminal.
+```bash
+gp preview "$(gp url 9966)"
+```
+
+You should find the Nice user interface:
+
+![Pet Clinic Welcome Screen](doc/img/swagger.png?raw=true)
+
+#### ✅ 10c. Use API
+
+Locate the resource `Veterinarian Specialties Api` and speciallty the method below to test the service.
+
+```bash
+GET ​/petclinic​/api​/specialties
+```
+
+To execute the service expand the method, locate the button `[TRY IT OUT]` 
+
+![Pet Clinic Welcome Screen](doc/img/tryit-1.png?raw=true)
+
+Click `[EXECUTE]`, this particular method does not take any argument.
+
+![Pet Clinic Welcome Screen](doc/img/tryit-2.png?raw=true)
 
 
+## 11. Angular User Interface
 
-## 10. Working with Apis
+>[Reference Documentation](https://spring-petclinic.github.io/spring-petclinic-angular/)
 
-## 11. Working with user interface
+>[Source Code](https://github.com/spring-petclinic/spring-petclinic-angular/tree/4f58177e29476a4866723a7edc6dab614e96eec0)
 
+Keep the application running on the first terminal. We need our backend. Let'us start the user interface.
+
+#### ✅ 11a. Start the front end
+
+On a `NEW TERMINAL` navigate to the Angular application and start it
 
 ```
  cd /workspace/workshop-spring-reactive/spring-petclinic-angular
  npm run start
 ```
 
-
-![Pet Clinic Welcome Screen](doc/img/swagger.png?raw=true)
-
+#### ✅ 11b. Start the front end
 
 
-## Homework
+Open your browser on port `4200` using the the remote explorer or entering in a new terminal.
 
-<img src="images/streaming-workshop.png?raw=true" width="200" align="right" />
+```bash
+gp preview "$(gp url 4200)"
+```
+
+![Pet Clinic Welcome Screen](doc/img/ui-top.png?raw=true)
+
+This is it for the Hands-on TODAY. The angular project is a separated project on its own and we simply reuse it as a submodule but did not code anything there.
+
+Congratulations you made it to the END.
+
+## 12. Homeworks
+
+<img src="images/petclinic-workshop.png?raw=true" width="200" align="right" />
 
 Don't forget to complete your assignment and get your verified skill badge! Finish and submit your homework!
 
