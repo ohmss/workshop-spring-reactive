@@ -66,18 +66,12 @@ public class VetReactiveServices implements InitializingBean {
         refDao.saveList(VET_SPECIALTY, default_vet_specialties).subscribe();
         
         // Add all vets entities
-        Mono.from(vetDao.upsert(new VetEntity(UUID.fromString("11111111-1111-1111-1111-111111111111"),
-                "James", "Carter", new HashSet<String>()))).subscribe();
-        Mono.from(vetDao.upsert(new VetEntity(UUID.fromString("22222222-2222-2222-2222-222222222222"), 
-                "Helen", "Leary", new HashSet<String>(Arrays.asList("radiology"))))).subscribe();
-        Mono.from(vetDao.upsert(new VetEntity(UUID.fromString("33333333-3333-3333-3333-333333333333"), 
-                "Linda", "Douglas", new HashSet<String>(Arrays.asList("dentistry", "surgery"))))).subscribe();
-        Mono.from(vetDao.upsert(new VetEntity(UUID.fromString("44444444-4444-4444-4444-444444444444"), 
-                "Rafael", "Ortega", new HashSet<String>(Arrays.asList("surgery"))))).subscribe();
-        Mono.from(vetDao.upsert(new VetEntity(UUID.fromString("55555555-5555-5555-5555-555555555555"),
-                "Henry", "Stevens", new HashSet<String>(Arrays.asList("radiology"))))).subscribe();
-        Mono.from(vetDao.upsert(new VetEntity(UUID.fromString("66666666-6666-6666-6666-666666666666"),
-                "Sharon", "Jenkins", new HashSet<String>()))).subscribe();
+        Mono.from(vetDao.upsert(new VetEntity("11111111-1111-1111-1111-111111111111", "James", "Carter"))).subscribe();
+        Mono.from(vetDao.upsert(new VetEntity("22222222-2222-2222-2222-222222222222", "Helen", "Leary", "radiology"))).subscribe();
+        Mono.from(vetDao.upsert(new VetEntity("33333333-3333-3333-3333-333333333333", "Linda", "Douglas", "dentistry", "surgery"))).subscribe();
+        Mono.from(vetDao.upsert(new VetEntity("44444444-4444-4444-4444-444444444444", "Rafael", "Ortega", "surgery"))).subscribe();
+        Mono.from(vetDao.upsert(new VetEntity("55555555-5555-5555-5555-555555555555", "Henry", "Stevens", "radiology"))).subscribe();
+        Mono.from(vetDao.upsert(new VetEntity("66666666-6666-6666-6666-666666666666", "Sharon", "Jenkins"))).subscribe();
     }
     
     /**

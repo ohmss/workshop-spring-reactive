@@ -8,9 +8,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
-import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.web.server.SecurityWebFilterChain;
-import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
 import org.springframework.web.cors.reactive.CorsUtils;
 import org.springframework.web.reactive.config.EnableWebFlux;
 import org.springframework.web.reactive.config.WebFluxConfigurer;
@@ -60,21 +57,6 @@ public class WebFluxConfig implements WebFluxConfigurer {
         }
         return chain.filter(ctx);
       };
-    }
-    
-    @Bean
-    public SecurityWebFilterChain securityFilterChain(ServerHttpSecurity http) {
-        return http.authorizeExchange()
-                   .anyExchange().permitAll()
-                   .and().csrf().disable().build();
-    }
-    
-    /**
-     * Enable validation of parameters through Annotation. (spring-validation)
-     */
-    @Bean
-    public MethodValidationPostProcessor methodValidationPostProcessor() {
-        return new MethodValidationPostProcessor();
     }
     
 }

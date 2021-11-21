@@ -1,25 +1,18 @@
-package com.datastax.workshop.petclinic.vet.db;
+package com.datastax.workshop.petclinic.vet.springdata;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-import com.datastax.oss.driver.api.mapper.annotations.CqlName;
-import com.datastax.oss.driver.api.mapper.annotations.Entity;
-import com.datastax.oss.driver.api.mapper.annotations.PartitionKey;
+import org.springframework.data.cassandra.core.mapping.CassandraType;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.cassandra.core.mapping.CassandraType.Name;
 
-/**
- * Represents a Veterinarians (Vet) in the Data Accesslayer (Cassandra)
- *
- * @author Cedrick LUNVEN (@clunven)
-*/
-@Entity
-@CqlName(VetEntity.VET_TABLE)
-public class VetEntity implements Serializable {
 
-    /** Serial. */
-    private static final long serialVersionUID = 7407715795842376538L;
+@Table(VetEntitySpring.VET_TABLE)
+public class VetEntitySpring {
     
     /** Groups Constant. */
     public static final String VET_TABLE            = "petclinic_vet";
@@ -28,48 +21,36 @@ public class VetEntity implements Serializable {
     public static final String VET_ATT_FIRSTNAME    = "first_name";
     public static final String VET_ATT_SPECIALTIES  = "specialties";
     public static final String VET_IDX_NAME         = "petclinic_idx_vetname";
-
-    @PartitionKey
-    @CqlName(VET_ATT_ID)
+    
+    @PrimaryKey
+    @Column(VET_ATT_ID)
     private UUID id;
 
-    @CqlName(VET_ATT_FIRSTNAME)
+    @Column(VET_ATT_FIRSTNAME)
     private String firstName;
 
-    @CqlName(VET_ATT_LASTNAME)
+    @Column(VET_ATT_LASTNAME)
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String lastName;
     
-    @CqlName(VET_ATT_SPECIALTIES)
-    private Set<String> specialties = new HashSet<>();  
-        
-    /**
-     * Defaut constructor
-     */
-    public VetEntity() {
-    }
+    @Column(VET_ATT_SPECIALTIES)
+    @CassandraType(type = CassandraType.Name.SET, typeArguments = Name.TEXT)
+    private Set<String> specialties = new HashSet<>(); 
     
-    /**
-     * Constructor with initialized uid
-     */
-    public VetEntity(String uid) {
+    public VetEntitySpring() {}
+    
+    public VetEntitySpring(String uid) {
         this.id = UUID.fromString(uid);
     }
     
-    /**
-     * Contructor
-     * @param uid
-     * @param firstname
-     * @param lastname
-     * @param specialties
-     */
-    public VetEntity(String uid, String firstname, String lastname, String...specialties) {
+    public VetEntitySpring(String uid, String firstname, String lastname, String...specialties) {
        this(uid);
        this.firstName   = firstname;
        this.lastName    = lastname;
        this.specialties = Set.of(specialties);
     }
     
-    public VetEntity(UUID uid, String firstname, String lastname, Set<String> specialties) {
+    public VetEntitySpring(UUID uid, String firstname, String lastname, Set<String> specialties) {
         this.id          = uid;
         this.firstName   = firstname;
         this.lastName    = lastname;
@@ -89,7 +70,7 @@ public class VetEntity implements Serializable {
     /**
      * Setter accessor for attribute 'id'.
      * @param id
-     * 		new value for 'id '
+     *      new value for 'id '
      */
     public void setId(UUID id) {
         this.id = id;
@@ -108,7 +89,7 @@ public class VetEntity implements Serializable {
     /**
      * Setter accessor for attribute 'firstName'.
      * @param firstName
-     * 		new value for 'firstName '
+     *      new value for 'firstName '
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -127,7 +108,7 @@ public class VetEntity implements Serializable {
     /**
      * Setter accessor for attribute 'lastName'.
      * @param lastName
-     * 		new value for 'lastName '
+     *      new value for 'lastName '
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -146,7 +127,7 @@ public class VetEntity implements Serializable {
     /**
      * Setter accessor for attribute 'specialties'.
      * @param specialties
-     * 		new value for 'specialties '
+     *      new value for 'specialties '
      */
     public void setSpecialties(Set<String> specialties) {
         this.specialties = specialties;

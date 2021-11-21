@@ -14,7 +14,7 @@
 This sample is a fully reactive version of the Spring PetClinic application using Spring WebFlux.
 <!--- ENDEXCLUDE --->
 
-## :clipboard: Table of content
+## 📋 Table of content
 
 <img src="https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/doc/img/ui-top.png?raw=true" align="right" width="400px"/>
 
@@ -25,7 +25,7 @@ This sample is a fully reactive version of the Spring PetClinic application usin
 4. [Create your Database](#4-create-astra-db-instance)
 5. [Create your Schema](#5-create-your-schema-with-cql-console)
 6. [Create your Token](#6-create-your-token)
-7. [Start Gitpod and setup your application](#7-start-gitpod)
+7. [Start Gitpod and Setup your application](#7-start-gitpod)
 8. [Setup and work with Drivers](#1-objectives)
 9. [Working with Spring](#1-objectives)
 10. [Working with user interface](#1-objectives)
@@ -283,9 +283,9 @@ We are now set with the database and credentials. Let's start coding with Spring
 
 [🏠 Back to Table of Contents](#clipboard-table-of-content)
 
-### 7. Start Gitpod and setup your application
+### 7. Start Gitpod and Setup your application
 
-#### ✅ 7a Open Gitpod
+#### ✅ 7a. Open Gitpod
 
 Click the button below it should route you to your workspace:
 [https://gitpod.io/#https://github.com/datastaxdevs/workshop-spring-reactive](https://gitpod.io/#https://github.com/datastaxdevs/workshop-spring-reactive).
@@ -299,66 +299,216 @@ Git pod pulls the image.
 ![image](doc/img/pulling-image.png?raw=true)
 
 
-#### ✅ 7b Know your gitpod
+#### 📘 Home Screen
 
-Gitpod exposes some ports that we will need later
-
-```bash
-gp url 8080
-gp url 3000
-```
-
-
+This is the home Screen. It is a VSCode instance in the cloud. As you can seeNotice multiple panels are opens with 2 terminals, the readme and the explorer. 
 ![image](doc/img/start-ui.png?raw=true)
 
-![Pet Clinic Welcome Screen](doc/img/ui-top.png?raw=true)
+#### 📘 How to open a new terminal
 
-![Pet Clinic Welcome Screen](doc/img/internal-architecture.png?raw=true)
+You can open a new terminal from the menu in the ellipsis in the top left hand corner. Then use the Switch termina panel to move from another.
+![image](doc/img/gitpod-new-terminal.png?raw=true)
+
+
+#### ✅ 7b. Know your gitpod
+
+
+- **📘 All tools are installed**
+
+Gitpod provide everything you need to work with JAVA, NODEJS (but also python, docker and many more). Open a new **TERMINAL** and enter the following command.
+
+```bash
+java --version
+```
+
+> 🖥️ Expected output
+```
+Picked up JAVA_TOOL_OPTIONS: -Xmx2576m
+openjdk 11.0.11 2021-04-20 LTS
+OpenJDK Runtime Environment Zulu11.48+21-CA (build 11.0.11+9-LTS)
+OpenJDK 64-Bit Server VM Zulu11.48+21-CA (build 11.0.11+9-LTS, mixed mode)
+```
+
+```bash
+mvn -v
+```
+
+> 🖥️ Expected output
+```
+Picked up JAVA_TOOL_OPTIONS: -Xmx2576m
+Apache Maven 3.8.1 (05c21c65bdfed0f71a2f2ada8b84da59348c4c5d)
+Maven home: /home/gitpod/.sdkman/candidates/maven/current
+Java version: 11.0.11, vendor: Azul Systems, Inc., runtime: /home/gitpod/.sdkman/candidates/java/11.0.11.fx-zulu
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "5.4.0-1051-gke", arch: "amd64", family: "unix"
+```
+
+```bash
+node -v
+```
+
+> 🖥️ Expected output
+```
+v14.17.0
+```
+
+- **📘 Remote explorer**
+
+In the tutorial we will also work with the preview and the remote explorer. To switch from source explorer to remove explorer local the dekstop icon on the menu bar in the left (6th item).
+
+![image](doc/img/gitpod-remote-explorer.png?raw=true)
+
+- **📘 Simple Browser preview**
+
+As of now **nothing IS running** but if you want to open a preview or a new browser use the icons as show below.
+
+![image](doc/img/gitpod-preview.png?raw=true)
+
+
+#### ✅ 7c. Setup your application
+
+Locate the File `application.yaml` in the folder `src/main/resources`, there your 3 properties to update marked with `CHANGE_ME`.
+
+```yaml
+server:
+  port: 9966
+
+logging:
+  pattern:
+    console: "%d{HH:mm:ss.SSS} %magenta(%-5level) %cyan(%-45logger) : %msg%n"
+  level:
+    root: WARN
+    com.datastax.workshop: INFO
+    com.datastax.astra: INFO
+    com.datastax.stargate: INFO
+    com.datastax.oss.driver: ERROR
+    com.sprinframework.test: ERROR
+    ch.qos.logback.classic: ERROR
+    
+# Setup your application
+astra:
+  application-token: <CHANGE_ME>
+  database-id: <CHANGE_ME>
+  database-region: <CHANGE_ME>
+  keyspace: spring_petclinic
+  metrics:
+    enabled: false
+```
+
+- *The DatabaseID is located on the home page*
+![Pet Clinic Welcome Screen](doc/img/astra-config-1.png?raw=true)
+
+- *The Database region (adn keyspace) are located in the details page*
+![Pet Clinic Welcome Screen](doc/img/astra-config-2.png?raw=true)
+
+- *Make sure the Token local like `AstraCS:xxxxxxxxxxx:yyyyyyyyyyy*
+
+#### ✅ 7d. Validate your setup
+
+Have a look to the code of [`Test01_Connectivity`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test01_Connectivity.java) here we use the `CqlSession` and `AstraClient` to show some infromations regarding your Astra DB. Execute the test with:
+
+```bash
+mvn test -Dtest=com.datastax.workshop.petclinic.Test01_Connectivity
+```
+
+> 🖥️ Expected output
+```bash
+== CQL_SESSION ==
++ Your Keyspace: spring_petclinic
++ Vet Specialty: 
+[dentistry, radiology, surgery]
+== ASTRA ==
++ Your OrganizationID: f9460f14-9879-4ebe-83f2-48d3f3dce13c
++ Your Databases: 
+workshops : id=3ed83de7-d97f-4fb6-bf9f-82e9f7eafa23, region=eu-west-1
+```
+
+## 8. Working with DAO
+
+#### ✅ 8a. The CqlSession
+
+The integration to Cassandra is always implemented through the `CqlSession`. A first way to implement a DAO is to just use this object explicitely. Check the code of [`Test02_DaoWithCqlSession`]https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test02_WorkingWithDao.java) and run the following test:
+
+```bash
+mvn test -Dtest=com.datastax.workshop.petclinic.Test02_DaoWithCqlSession
+```
+
+Notice how you need to put a terminal call `block()` or use the `StepVerifier` included in Spring Reactive.
+
+```java
+@Test
+public void should_list_vet_specialies() {
+ System.out.println(referenceListDao
+   .findReferenceList("vet_specialty").block());
+        
+ StepVerifier
+  .create(referenceListDao.findReferenceList("vet_specialty"))
+  .expectNext(Set.of("dentistry", "radiology", "surgery"))
+  .expectComplete()
+  .verify();
+}
+```
+
+#### ✅ 8b. The Driver Object Mapping Layer
+
+We will illustrate this with the `Vet` in this [package](https://github.com/datastaxdevs/workshop-spring-reactive/tree/master/src/main/java/com/datastax/workshop/petclinic/vet/db)
+
+1.  Define an `@Entity` where object attributes matches the table columns [`VetEntity`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/main/java/com/datastax/workshop/petclinic/vet/db/VetEntity.java)
+
+2. Define an `@Dao` interface with only the method you want to implements [`VetReactiveDao`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/main/java/com/datastax/workshop/petclinic/vet/db/VetReactiveDao.java)
+
+```java
+@Dao
+public interface VetReactiveDao {
+
+ @Select
+ MappedReactiveResultSet<VetEntity> findById(@NotNull UUID vetId);
+
+ // More methods....
+}
+```
+
+3. Define the `@Mapper` to explain how to create the `Dao` from the the Cqlsession. [`VetReactiveDaoMapper`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/main/java/com/datastax/workshop/petclinic/vet/db/VetReactiveDaoMapper.java)
+
+```java
+@Mapper
+public interface VetReactiveDaoMapper {
+  @DaoFactory
+  VetReactiveDao vetDao(@DaoKeyspace CqlIdentifier keyspace);
+}
+```
+
+Now execute the test to work with the DAO `Test03_DaoWithDriverObjectMapping`
+
+```bash
+mvn test -Dtest=com.datastax.workshop.petclinic.Test03_DaoWithDriverObjectMapping
+```
+
+## 9. Working with Spring Data
+
+[Spring Data](https://spring.io/projects/spring-data) provides a common astraction on top of multiple databases leveraging JPA. The quantity of code is greatly reduce by working with interfaces `CrudRepository` and entities.
+
+- Define an entity [`VetEntitySpring`]() where object attributes matches the table columns. You can notice that the set of annotations is not the same as with java driver mapper.
+
+
+
+
+
+
+## 10. Working with Apis
+
+## 11. Working with user interface
+
+
+```
+ cd /workspace/workshop-spring-reactive/spring-petclinic-angular
+ npm run start
+```
+
 
 ![Pet Clinic Welcome Screen](doc/img/swagger.png?raw=true)
 
-![Pet Clinic Welcome Screen](doc/img/logical-architecture.png?raw=true)
 
-- `spring-parclinic-angular`: This is the existing project that provides a user interface implementation using Angular. It has been used as well for other backend projects like the
-**spring-petclinic-rest**
-
-- `prometheus`: Our component exposes some metrics through the actuator endpoint. A registry will push this information into the Prometheus database (docker-based).
-
-![Pet Clinic Welcome Screen](doc/img/prometheus.png?raw=true)
-
-- `Grafana`: Allows to create dashboards based on data stored in prometheus.
-
-![Pet Clinic Welcome Screen](doc/img/grafana.png?raw=true)
-
-- `zipkin`: Our component includes the `spring-cloud-sleuth` dependency allowing Brave to push metrics usage of the API to the distributed tracing component Zipkin. To enable this tracing
-set the property `zipkin.enabled` to true in `application.yaml`.
-To start zipkin use `docker-compose up -d`
-
-```
-  zipkin:
-    enabled: true
-    baseUrl: http://localhost:9411
-    sender:
-      type: web
-```
-
-![Pet Clinic Welcome Screen](doc/img/zipkin.png?raw=true)
-
-- `Apache Cassandra`: A NoSQL database
-
-- `DataStax Astra` : Apache Cassandra available in the Cloud for free as a managed service (DBaas)
-
-
-### Data Model diagram
-
-The underlying data model implemented in Apache Cassandra is different from the one you would have defined with a relational database.
-
-![Pet Clinic Welcome Screen](doc/img/data-model.png?raw=true)
-
-To enable scalability, Apache Cassandra does not support joins or integrity constraints. Therefore we used some denormalization.
-We also created some `secondary indices` to queries columns that are not the PARTITION KEY. These secondary indices work well in this case because the cardinality is low (e.g, few pets for an owner).
-
-The application generates the objects related to the data model (e.g., tables, indices, udts) at startup.
 
 ## Homework
 

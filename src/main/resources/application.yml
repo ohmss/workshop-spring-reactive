@@ -1,20 +1,6 @@
 server:
   port: 9966
 
-logging:
-  pattern:
-    console: "%d{HH:mm:ss.SSS} %magenta(%-5level) %cyan(%-45logger) : %msg%n"
-  level:
-    root: WARN
-    com.datastax.workshop: INFO
-    com.datastax.astra: INFO
-    com.datastax.stargate: INFO
-    com.datastax.oss.driver: ERROR
-    com.sprinframework.test: ERROR
-    ch.qos.logback.classic: ERROR
-    
-    
-# Connecting to Cassandra
 astra:
   application-token: AstraCS:gdZaqzmFZszaBTOlLgeecuPs:edd25600df1c01506f5388340f138f277cece2c93cb70f4b5fa386490daa5d44
   database-id: 3ed83de7-d97f-4fb6-bf9f-82e9f7eafa23
