@@ -1,13 +1,11 @@
 <!--- STARTEXCLUDE --->
-# Reactive Implementation of 🐈 Spring PetClinic 🐕
-
+# Workshop 🐈 Spring PetClinic Reactive 🐕 
 
 [![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/datastaxdevs/workshop-streaming-game)
 [![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
 
-
-*50 minutes, Intermediate, [Start Building](https://github.com/DataStax-Examples/spring-petclinic-reactive#prerequisites)*
+*50 minutes, Intermediate, [Start Building](#2-frequently-asked-questions)*
 
 ![banner](doc/img/banner.png?raw=true)
 
@@ -18,19 +16,21 @@ This sample is a fully reactive version of the Spring PetClinic application usin
 
 <img src="https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/doc/img/ui-top.png?raw=true" align="right" width="400px"/>
 
+<img src="https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/doc/img/ui-veterinarians
+.png?raw=true" align="right" width="400px"/>
 
 1. [Objectives](#1-objectives)
 2. [Frequently asked questions](#2-frequently-asked-questions)
 3. [Materials for the Session](#3-materials-for-the-session)
 4. [Create your Database](#4-create-astra-db-instance)
 5. [Create your Schema](#5-create-your-schema-with-cql-console)
-6. [Create your Token](#6-create-your-token)
-7. [Start Gitpod and setup your application](#7-start-gitpod)
-8. [Working with Cassandra Drivers](#1-objectives)
-9. [Working with Spring Data](#1-objectives)
-10. [Working with Spring WebFlux](#1-objectives)
-11. [Working with Angular UI](#1-objectives)
-12. [Homeworks](#1-objectives)
+6. [Create your Token](#6-create-astra-token)
+7. [Start Gitpod and setup your application](#7-start-gitpod-and-setup-your-application)
+8. [Working with Cassandra Drivers](#8-working-with-cassandra-drivers)
+9. [Working with Spring Data](#9-working-with-spring-data)
+10. [Working with Spring WebFlux](#10-working-with-spring-webflux)
+11. [Working with Angular UI](#11-angular-user-interface)
+12. [Homeworks](#12-homeworks)
 
 ## 1. Objectives
 
@@ -40,7 +40,7 @@ This sample is a fully reactive version of the Spring PetClinic application usin
 * *Understand what are the benefit a **Reactive Programming*** 
 * ***Get a working full stack application Spring Boot-Data-Reactive***
 
-[🏠 Back to Table of Contents](#clipboard-table-of-content)
+[🏠 Back to Table of Contents](#-table-of-content)
 
 ## 2. Frequently asked questions
 <p/>
@@ -81,7 +81,7 @@ Attending the session is not enough. You need to complete the homeworks detailed
 </details>
 <p/>
 
-[🏠 Back to Table of Contents](#clipboard-table-of-content)
+[🏠 Back to Table of Contents](#-table-of-content)
 
 ## 3. Materials for the Session
 
@@ -92,7 +92,7 @@ we have you covered. In this repository, you'll find everything you need for thi
 - [Datastax Developers Discord chat](https://bit.ly/cassandra-workshop)
 - [Questions and Answers](https://community.datastax.com/)
 
-[🏠 Back to Table of Contents](#clipboard-table-of-content)
+[🏠 Back to Table of Contents](#-table-of-content)
 
 ## 4. Create Astra DB Instance
 
@@ -130,7 +130,7 @@ The status will change to `Active` when the database is ready, this will only ta
 
 ![image](doc/img/astra-create-db.gif?raw=true)
 
-[🏠 Back to Table of Contents](#clipboard-table-of-content)
+[🏠 Back to Table of Contents](#-table-of-content)
 
 ## 5. Create your schema with CQL Console
 
@@ -239,7 +239,7 @@ INSERT INTO petclinic_reference_lists(list_name, values)
 VALUES ('vet_specialty', {'radiology', 'dentistry', 'surgery'});
 ```
 
-[🏠 Back to Table of Contents](#clipboard-table-of-content)
+[🏠 Back to Table of Contents](#-table-of-content)
 
 ## 6. Create Astra Token
 
@@ -281,7 +281,7 @@ To know more about roles of each token you can have a look to [this video.](http
 
 We are now set with the database and credentials. Let's start coding with Spring !
 
-[🏠 Back to Table of Contents](#clipboard-table-of-content)
+[🏠 Back to Table of Contents](#-table-of-content)
 
 ### 7. Start Gitpod and Setup your application
 
@@ -423,6 +423,8 @@ mvn test -Dtest=com.datastax.workshop.petclinic.Test01_Connectivity
 workshops : id=3ed83de7-d97f-4fb6-bf9f-82e9f7eafa23, region=eu-west-1
 ```
 
+[🏠 Back to Table of Contents](#-table-of-content)
+
 ## 8. Working with Cassandra Drivers
 
 #### ✅ 8a. The CqlSession
@@ -486,6 +488,8 @@ Now execute the test to work with the DAO `Test03_DaoWithDriverObjectMapping`
 mvn test -Dtest=com.datastax.workshop.petclinic.Test03_DaoWithDriverObjectMapping
 ```
 
+[🏠 Back to Table of Contents](#-table-of-content)
+
 ## 9. Working with Spring Data
 
 [Spring Data](https://spring.io/projects/spring-data) provides a common astraction on top of multiple databases leveraging JPA. The quantity of code is greatly reduce by working with interfaces `CrudRepository` and entities.
@@ -508,6 +512,8 @@ Execute the test to work with the DAO `Test04_DaoWithSpringData`
 ```bash
 mvn test -Dtest=com.datastax.workshop.petclinic.Test04_DaoWithSpringData
 ```
+
+[🏠 Back to Table of Contents](#-table-of-content)
 
 ## 10. Working with Spring WebFlux
 
@@ -590,6 +596,7 @@ Click `[EXECUTE]`, this particular method does not take any argument.
 
 ![Pet Clinic Welcome Screen](doc/img/tryit-2.png?raw=true)
 
+[🏠 Back to Table of Contents](#-table-of-content)
 
 ## 11. Angular User Interface
 
@@ -630,9 +637,10 @@ Congratulations you made it to the END.
 Don't forget to complete your assignment and get your verified skill badge! Finish and submit your homework!
 
 1. Complete the practice steps as described below until you have your own app running in Gitpod.
-2. Now roll up your sleeves and modify the code in two ways: (1) we want the API to send a greeting to each new player in the chat box, and (2) we want the player names in the game area to match the icon color. _Please read the detailed guidance found [below](#6-homework-instructions)_.
-3. Take a SCREENSHOT of the running app modified this way. _Note: you will have to restart the API and reload the client to see all changes!_
-4. Submit your homework [here](https://dtsx.io/streaming-game-homework).
+2. Answer the technical questions in the form (We promise, it is NOT difficult if you follow the workshop).
+3. Add a funny PET TYPE in the DATABASE and take a SCREENSHOT of the running app with your data.
+4. Submit your homework [here](https://dtsx.io/petclinic-homework).
 
-That's it, you are done! Expect an email in a few days!
+5. *(totally optional)* Challenge for 🌶️🌶️🌶️ EXTRA SPICE 🌶️🌶️🌶️. Fork the project, change the code for more repositories to use Spring Data (replacing the Java drivers) and do a pull request. 👕 If the submission has a good quality we will ship a SWAG BOX for free.
 
+[🏠 Back to Table of Contents](#-table-of-content)
