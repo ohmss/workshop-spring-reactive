@@ -15,21 +15,14 @@ tasks:
       # suppress the "Would you like to share anonymous usage data with the Angular Team at Google under Google’s Privacy Policy" message.
       NG_CLI_ANALYTICS: ci
   - name: spring-petclinic-reactive
-    init: |
-      mvn clean package install
     command: |
-      . setup.sh
-      java -jar target/spring-petclinic-reactive-1.0.0-SNAPSHOT.jar 
-      
+     mvn clean
+     
 ports:
   - port: 4200
     onOpen: open-browser 
-# Backend port showing 
   - port: 9966
     onOpen: open-browser
-# This is actuator port
-  - port: 9967
-    onOpen: ignore
 
 github:
   prebuilds:
