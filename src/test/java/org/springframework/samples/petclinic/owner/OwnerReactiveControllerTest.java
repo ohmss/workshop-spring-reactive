@@ -12,22 +12,21 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
-import org.springframework.context.annotation.Primary;
 import org.springframework.http.MediaType;
-import org.springframework.samples.petclinic.conf.SecurityDisabledConfig;
-import org.springframework.samples.petclinic.owner.db.OwnerReactiveDao;
-import org.springframework.samples.petclinic.pet.Pet;
-import org.springframework.samples.petclinic.pet.db.PetReactiveDao;
-import org.springframework.samples.petclinic.visit.db.VisitReactiveDao;
-import org.springframework.security.config.web.server.ServerHttpSecurity;
-import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.reactive.function.BodyInserters;
+
+import com.datastax.workshop.petclinic.db.VisitReactiveDao;
+import com.datastax.workshop.petclinic.owner.Owner;
+import com.datastax.workshop.petclinic.owner.OwnerReactiveController;
+import com.datastax.workshop.petclinic.owner.OwnerReactiveServices;
+import com.datastax.workshop.petclinic.owner.db.OwnerReactiveDao;
+import com.datastax.workshop.petclinic.pet.Pet;
+import com.datastax.workshop.petclinic.pet.db.PetReactiveDao;
 
 import reactor.core.publisher.Mono;
 
@@ -38,7 +37,7 @@ import reactor.core.publisher.Mono;
  */
 @ExtendWith(SpringExtension.class)
 @WebFluxTest(controllers = OwnerReactiveController.class)
-@Import({OwnerReactiveServices.class, SecurityDisabledConfig.class})
+@Import({OwnerReactiveServices.class})
 @TestPropertySource(locations = "/application-test.properties")
 public class OwnerReactiveControllerTest {
     

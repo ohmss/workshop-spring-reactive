@@ -9,10 +9,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.samples.petclinic.owner.db.OwnerReactiveDao;
-import org.springframework.samples.petclinic.pet.Pet;
-import org.springframework.samples.petclinic.pet.db.PetReactiveDao;
-import org.springframework.samples.petclinic.visit.db.VisitReactiveDao;
+
+import com.datastax.workshop.petclinic.db.VisitReactiveDao;
+import com.datastax.workshop.petclinic.owner.Owner;
+import com.datastax.workshop.petclinic.owner.OwnerReactiveServices;
+import com.datastax.workshop.petclinic.owner.db.OwnerReactiveDao;
+import com.datastax.workshop.petclinic.pet.Pet;
+import com.datastax.workshop.petclinic.pet.db.PetReactiveDao;
 
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;

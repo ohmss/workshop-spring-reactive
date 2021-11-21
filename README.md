@@ -14,23 +14,22 @@
 This sample is a fully reactive version of the Spring PetClinic application using Spring WebFlux.
 <!--- ENDEXCLUDE --->
 
-
 ## :clipboard: Table of content
 
 <img src="https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/doc/img/ui-top.png?raw=true" align="right" width="400px"/>
 
 
 1. [Objectives](#1-objectives)
-2. [Frequently asked questions](#1-objectives)
-3. [Materials for the Session](#2-frequently-asked-questions)
-4. [Create your Database](#3-materials-for-the-session)
-5. [Create your Schema](#3-materials-for-the-session)
-6. [Create your Token](#3-materials-for-the-session)
-
-5. [Hands-on - Work with Drivers](#1-objectives)
-6. [Hands-on - Work with Spring](#1-objectives)
-7. [Hands-on - User Interface](#1-objectives)
-8. [Homeworks](#1-objectives)
+2. [Frequently asked questions](#2-frequently-asked-questions)
+3. [Materials for the Session](#3-materials-for-the-session)
+4. [Create your Database](#4-create-astra-db-instance)
+5. [Create your Schema](#5-create-your-schema-with-cql-console)
+6. [Create your Token](#6-create-your-token)
+7. [Start Gitpod and setup your application](#7-start-gitpod)
+8. [Setup and work with Drivers](#1-objectives)
+9. [Working with Spring](#1-objectives)
+10. [Working with user interface](#1-objectives)
+11. [Homeworks](#1-objectives)
 
 
 ## 1. Objectives
@@ -95,18 +94,17 @@ we have you covered. In this repository, you'll find everything you need for thi
 
 [🏠 Back to Table of Contents](#clipboard-table-of-content)
 
-
 ## 4. Create Astra DB Instance
 
 **`ASTRA DB`** is the simplest way to run Cassandra with zero operations at all - just push the button and get your cluster. No credit card required, $25.00 USD credit every month, roughly 5M writes, 30M reads, 40GB storage monthly - sufficient to run small production workloads.
 
-#### ✅ Step 4a. 
+#### ✅ 4a. Register 
 
 If you do have an account yet register and sign In to Astra DB this is FREE and NO CREDIT CARD asked** [https://astra.datastax.com](https://astra.dev/11-22): You can use your `Github`, `Google` accounts or register with an `email`.
 
 _Make sure to chose a password with minimum 8 characters, containing upper and lowercase letters, at least one number and special character_
 
-#### ✅ Step 4b. Create a "FREE" plan
+#### ✅ 4b. Create a "FREE" plan
 
 Follow this [guide](https://docs.datastax.com/en/astra/docs/creating-your-astra-database.html), to set up a pay as you go database with a free $25 monthly credit. You will find below recommended values to enter:
 
@@ -132,10 +130,11 @@ The status will change to `Active` when the database is ready, this will only ta
 
 ![image](doc/img/astra-create-db.gif?raw=true)
 
+[🏠 Back to Table of Contents](#clipboard-table-of-content)
 
 ## 5. Create your schema with CQL Console
 
-#### ✅ 5a. Open CqlConsole and select your Keyspace
+#### ✅ 5a. Select keyspace in CQL Console
 
 As seen in the slides on the contrary of relational you start with the request and data model BEFORE CODING.
 
@@ -240,11 +239,13 @@ INSERT INTO petclinic_reference_lists(list_name, values)
 VALUES ('vet_specialty', {'radiology', 'dentistry', 'surgery'});
 ```
 
+[🏠 Back to Table of Contents](#clipboard-table-of-content)
+
 ## 6. Create Astra Token
 
 To connect to the database from Java code we need some credentials, this is what we are doing here.
 
-#### ✅ Step 4a: Generate Token
+#### ✅ 6a. Generate Token
 
 Following the [Manage Application Tokens docs](https://docs.datastax.com/en/astra/docs/manage-application-tokens.html) create a token with `Database Admnistrator` roles.
 
@@ -262,7 +263,7 @@ Following the [Manage Application Tokens docs](https://docs.datastax.com/en/astr
 
 This is what the token page looks like. You can now download the values as a CSV. We will need those values but you can also keep this window open for use later.
 
-![image](images/tutorials/astra-token.png?raw=true)
+![image](doc/img/astra-token.png?raw=true)
 
 Notice the clipboard icon at the end of each value.
 
@@ -272,18 +273,22 @@ Notice the clipboard icon at the end of each value.
 
 - `appToken:` We will use it as a api token Key to interact with APIs.
 
+#### ✅ 6b. Copy your token in your clipboard
+
 To know more about roles of each token you can have a look to [this video.](https://www.youtube.com/watch?v=nRqu44W-bMU)
 
 **Note: Make sure you don't close the window accidentally or otherwise - if you close this window before you copy the values, the application token is lost forever. They won't be available later for security reasons.**
 
 We are now set with the database and credentials. Let's start coding with Spring !
 
-[🏠 Back to Table of Contents](#table-of-content)
+[🏠 Back to Table of Contents](#clipboard-table-of-content)
 
+### 7. Start Gitpod and setup your application
 
-### 3. Start in Gitpod
+#### ✅ 7a Open Gitpod
 
-**✅ Open Gitpod (with creds copied to clipboard)**
+Click the button below it should route you to your workspace:
+[https://gitpod.io/#https://github.com/datastaxdevs/workshop-spring-reactive](https://gitpod.io/#https://github.com/datastaxdevs/workshop-spring-reactive).
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datastaxdevs/workshop-spring-reactive)
 
@@ -293,66 +298,27 @@ When you first launch gitpod, it builds the image.
 Git pod pulls the image.
 ![image](doc/img/pulling-image.png?raw=true)
 
-**✅ Paste credentials in Gitpod terminal**
 
-Once Gitpod loads the workspace, you'll be asked to paste your service account credentials in the Gitpod terminal at the bottom of the screen. The [setup.sh](setup.sh) script at the root of the repository is what asks this question.
+#### ✅ 7b Know your gitpod
 
-![image](doc/img/script-copy-creds.png?raw=true)
+Gitpod exposes some ports that we will need later
 
-**✅ Open Swagger UI in browser**
+```bash
+gp url 8080
+gp url 3000
+```
 
-When gitpod finishes building the app, a new tab will open in your browser showing the following.
 
-![image](doc/img/exec-start.png?raw=true)
-
-**🎉 Celebrate!**
-
-You've successfully built the Spring Petclinic Reactive backend application!
-
-![image](doc/img/exec-api-page.png?raw=true)
-
-**✅ Start the Web UI** :
-
-You may have noticed another terminal named `spring-petclinic-angular`. This is where the UI should start.
 
 ![image](doc/img/start-ui.png?raw=true)
 
-After answering the question about analytics usage, you should be able to access the UI on a new tab.
-
 ![Pet Clinic Welcome Screen](doc/img/ui-top.png?raw=true)
-
-**NOTE** If you want to run everything locally, reference the [LOCAL_README.md](doc/LOCAL_README.md)
-
-## Understand the architecture
-
-### Internal Architecture our of component
-
-Let's have a look inside the main component `spring-petclinic-reactive` to see which libraries and frameworks have been used.
 
 ![Pet Clinic Welcome Screen](doc/img/internal-architecture.png?raw=true)
 
-- `Spring-boot`: Spring Boot makes it easy to create stand-alone, production-grade Spring based Applications that you can "just run". We take an opinionated view of the Spring platform and third-party libraries so you can get started with minimum fuss. Most Spring Boot applications need minimal Spring configuration.
-
-- `Spring-Security`: Spring Security is a powerful and highly customizable authentication and access-control framework. It is the de-facto standard for securing Spring-based applications. Spring Security is a framework that focuses on providing both authentication and authorization to Java applications. Like all Spring projects, the real power of Spring Security is found in how easily it can be extended to meet custom requirements.
-
-- `Spring-WebFlux`: Spring sub framework allowing to create Reactive Rest Endpoint.
-
-- `Spring-Actuator`: Expose Endpoints to expose metrics to third party system: health, infos, jmx,prometheus,...
-
-- `Spring-Test`: Enabled unit testing and mocking with Spring configuration and beans.
-
-- `Spring-Cloud`: Spring Cloud provides tools for developers to quickly build some of the common patterns in distributed systems (e.g. configuration management, service discovery, circuit breakers, intelligent routing, micro-proxy, control bus, one-time tokens, global locks, leadership election, distributed sessions, cluster state). Coordination of distributed systems leads to boiler plate patterns, and using Spring Cloud developers can quickly stand up services and applications that implement those patterns. They will work well in any distributed environment, including the developer’s own laptop, bare metal data centres, and managed platforms such as Cloud Foundry.
-
-- `SpringFox` *(Swagger)*: Annotation based rest documentation generation and test client generation (swagger-ui).
-
 ![Pet Clinic Welcome Screen](doc/img/swagger.png?raw=true)
 
-
-### Logical Architecture
-
 ![Pet Clinic Welcome Screen](doc/img/logical-architecture.png?raw=true)
-
-Here, you can find a description of the logical architecture components:
 
 - `spring-parclinic-angular`: This is the existing project that provides a user interface implementation using Angular. It has been used as well for other backend projects like the
 **spring-petclinic-rest**
