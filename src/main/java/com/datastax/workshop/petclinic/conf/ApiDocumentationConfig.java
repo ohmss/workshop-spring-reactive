@@ -26,7 +26,7 @@ public class ApiDocumentationConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .groupName("petclinic")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("org.springframework.samples.petclinic"))
+                .apis(RequestHandlerSelectors.basePackage("com.datastax.workshop.petclinic"))
                 .paths(PathSelectors.ant("/petclinic/api/**"))
                 .build()
                 .apiInfo(apiInfo());

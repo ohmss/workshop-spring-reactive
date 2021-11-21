@@ -309,7 +309,6 @@ gp url 3000
 ```
 
 
-
 ![image](doc/img/start-ui.png?raw=true)
 
 ![Pet Clinic Welcome Screen](doc/img/ui-top.png?raw=true)
