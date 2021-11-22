@@ -52,7 +52,7 @@ This sample is a fully reactive version of the [Spring PetClinic](https://projec
 <li><a href="https://www.whitesourcesoftware.com/free-developer-tools/blog/update-node-js/" >Node 15 and npm 7 or later</a>
 </ol>
 </p>
-In this readme, we try to provide instructions for local development as well - but keep in mind that the main focus is development on Gitpod, hence **We can't guarantee live support** about local development in order to keep on track with the schedule. However, we will do our best to give you the info you need to succeed.
+In this readme, we try to provide instructions for local development as well - but keep in mind that the main focus is development on Gitpod, hence <strong>We can't guarantee live support</strong> about local development in order to keep on track with the schedule. However, we will do our best to give you the info you need to succeed.
 </details>
 <p/>
 <details>
