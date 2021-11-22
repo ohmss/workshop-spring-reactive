@@ -370,20 +370,9 @@ As of now **nothing IS running** but if you want to open a preview or a new brow
 Locate the File `application.yaml` in the folder `src/main/resources`, there your 3 properties to update marked with `CHANGE_ME`.
 
 ```yaml
+# Enforce listening on port 9966
 server:
   port: 9966
-
-logging:
-  pattern:
-    console: "%d{HH:mm:ss.SSS} %magenta(%-5level) %cyan(%-45logger) : %msg%n"
-  level:
-    root: WARN
-    com.datastax.workshop: INFO
-    com.datastax.astra: INFO
-    com.datastax.stargate: INFO
-    com.datastax.oss.driver: ERROR
-    com.sprinframework.test: ERROR
-    ch.qos.logback.classic: ERROR
     
 # Setup your application
 astra:
