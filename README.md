@@ -471,6 +471,12 @@ public void should_list_vet_specialies() {
   .verify();
 }
 ```
+> 🖥️ Expected output
+```
+15:34:33.926 INFO  com.datastax.workshop.petclinic.Test02_DaoWithCqlSession : Started Test02_DaoWithCqlSession in 14.782 seconds (JVM running for 16.99)
+[dentistry, radiology, surgery]
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 16.42 s - in com.datastax.workshop.petclinic.Test02_DaoWithCqlSession
+```
 
 #### ✅ 8b. The Driver Object Mapping Layer
 
@@ -616,6 +622,9 @@ Click `[EXECUTE]`, this particular method does not take any argument.
 
 ![Pet Clinic Welcome Screen](doc/img/tryit-2.png?raw=true)
 
+You should see a response something like below.
+
+![Pet Clinic Welcome Screen](doc/img/tryit-3.png?raw=true)
 [🏠 Back to Table of Contents](#-table-of-content)
 
 ## 11. Angular User Interface
