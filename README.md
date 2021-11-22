@@ -387,6 +387,13 @@ As of now **nothing IS running** but if you want to open a preview or a new brow
 
 Locate the File `application.yaml` in the folder `src/main/resources`, there your 3 properties to update marked with `CHANGE_ME`.
 
+- Open the file
+```bash
+ gp open /workspace/workshop-spring-reactive/src/main/resources/application.yml
+ ```
+
+- Edit the `CHANGE_ME` properties
+
 ```yaml
 # Enforce listening on port 9966
 server:
