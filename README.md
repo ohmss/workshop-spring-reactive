@@ -34,7 +34,7 @@ This sample is a fully reactive version of the [Spring PetClinic](https://projec
 * *Learn how Apache Cassandra **data modelling** is different from relational*
 * *Understand how **Java Applications** connect to Apache Cassandra™*
 * *Learn about **Spring and Spring Boot** Microservices*
-* *Understand what are the benefit a **Reactive Programming*** 
+* *Understand what are the benefit of **Reactive Programming*** 
 * ***Get a working full stack application Spring Boot-Data-Reactive***
 
 [🏠 Back to Table of Contents](#-table-of-content)
@@ -93,11 +93,11 @@ we have you covered. In this repository, you'll find everything you need for thi
 
 ## 4. Create Astra DB Instance
 
-**`ASTRA DB`** is the simplest way to run Cassandra with zero operations at all - just push the button and get your cluster. No credit card required, $25.00 USD credit every month, roughly 5M writes, 30M reads, 40GB storage monthly - sufficient to run small production workloads.
+**`ASTRA DB`** is the simplest way to run Cassandra with zero operations at all - just push the button and get your cluster. No credit card required, $25.00 USD credit every month, roughly 20M read/write operations, 80GB storage monthly - sufficient to run small production workloads.
 
 #### ✅ 4a. Register 
 
-If you do have an account yet register and sign In to Astra DB this is FREE and NO CREDIT CARD asked** [https://astra.datastax.com](https://astra.dev/11-22): You can use your `Github`, `Google` accounts or register with an `email`.
+If you do have an account yet register and sign In to Astra DB this is FREE and NO CREDIT CARD asked. [https://astra.datastax.com](https://astra.dev/11-22): You can use your `Github`, `Google` accounts or register with an `email`.
 
 _Make sure to chose a password with minimum 8 characters, containing upper and lowercase letters, at least one number and special character_
 
