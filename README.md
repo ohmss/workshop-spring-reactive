@@ -9,7 +9,7 @@
 
 ![banner](doc/img/banner.png?raw=true)
 
-This sample is a fully reactive version of the Spring PetClinic application using Spring WebFlux.
+This sample is a fully reactive version of the [Spring PetClinic](https://projects.spring.io/spring-petclinic/) application using [Spring WebFlux](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html)
 <!--- ENDEXCLUDE --->
 
 ## 📋 Table of content
@@ -314,6 +314,13 @@ You can open a new terminal from the menu in the ellipsis in the top left hand c
 
 Gitpod provide everything you need to work with JAVA, NODEJS (but also python, docker and many more). Open a new **TERMINAL** and enter the following command.
 
+#### ⚠️ COPY-PASTE IN GITPOD
+> *Some browser might block the CTRL+C and CRTL+V if that happen you can paste with right-click and paste.*
+
+>*The first time you paste something in Gitpod your might have a pop-up telling you to accept the command*
+
+- Check Java Version
+
 ```bash
 java --version
 ```
@@ -326,6 +333,7 @@ OpenJDK Runtime Environment Zulu11.48+21-CA (build 11.0.11+9-LTS)
 OpenJDK 64-Bit Server VM Zulu11.48+21-CA (build 11.0.11+9-LTS, mixed mode)
 ```
 
+- Check Maven version
 ```bash
 mvn -v
 ```
@@ -340,6 +348,8 @@ Default locale: en_US, platform encoding: UTF-8
 OS name: "linux", version: "5.4.0-1051-gke", arch: "amd64", family: "unix"
 ```
 
+- Check Node version
+
 ```bash
 node -v
 ```
@@ -347,6 +357,17 @@ node -v
 > 🖥️ Expected output
 ```
 v14.17.0
+```
+
+- Check NPM version
+
+```bash
+npm -v
+```
+
+> 🖥️ Expected output
+```
+6.14.13
 ```
 
 - **📘 Remote explorer**
@@ -387,7 +408,7 @@ astra:
 - *The Database region (adn keyspace) are located in the details page*
 ![Pet Clinic Welcome Screen](doc/img/astra-config-2.png?raw=true)
 
-- *Make sure the Token local like `AstraCS:xxxxxxxxxxx:yyyyyyyyyyy*
+- *Make sure the Token local like `AstraCS:xxxxxxxxxxx:yyyyyyyyyyy`*
 
 #### ✅ 7d. Validate your setup
 
@@ -594,14 +615,33 @@ Keep the application running on the first terminal. We need our backend. Let'us 
 
 #### ✅ 11a. Start the front end
 
-On a `NEW TERMINAL` navigate to the Angular application and start it
+On the terminal `spring-petclinic-angular:bash` navigate to the Angular application.
 
+```bash
+chunk {main} main.js, main.js.map (main) 331 kB [initial] [rendered]
+chunk {polyfills} polyfills.js, polyfills.js.map (polyfills) 293 kB [initial] [rendered]
+chunk {polyfills-es5} polyfills-es5.js, polyfills-es5.js.map (polyfills-es5) 463 kB [initial] [rendered]
+chunk {runtime} runtime.js, runtime.js.map (runtime) 6.08 kB [entry] [rendered]
+chunk {scripts} scripts.js, scripts.js.map (scripts) 411 kB [entry] [rendered]
+chunk {styles} styles.js, styles.js.map (styles) 1.16 MB [initial] [rendered]
+chunk {vendor} vendor.js, vendor.js.map (vendor) 6.87 MB [initial] [rendered]
+** Angular Live Development Server is listening on localhost:4200, open your browser on http://localhost:4200/ **
+ℹ ｢wdm｣: Compiled successfully.
+```
+
+- Kill the running application (the frontend must start after the backend here)
+
+```
+CTRL+C
+```
+
+- Start the application again
 ```
  cd /workspace/workshop-spring-reactive/spring-petclinic-angular
  npm run start
 ```
 
-#### ✅ 11b. Start the front end
+#### ✅ 11b. Open the user interface
 
 
 Open your browser on port `4200` using the the remote explorer or entering in a new terminal.
@@ -614,7 +654,7 @@ gp preview "$(gp url 4200)"
 
 This is it for the Hands-on TODAY. The angular project is a separated project on its own and we simply reuse it as a submodule but did not code anything there.
 
-Congratulations you made it to the END.
+[🏠 Back to Table of Contents](#-table-of-content)
 
 ## 12. Homeworks
 
@@ -630,3 +670,7 @@ Don't forget to complete your assignment and get your verified skill badge! Fini
 5. *(totally optional)* Challenge for 🌶️🌶️🌶️ EXTRA SPICE 🌶️🌶️🌶️. Fork the project, change the code for more repositories to use Spring Data (replacing the Java drivers) and do a pull request. 👕 If the submission has a good quality we will ship a SWAG BOX for free.
 
 [🏠 Back to Table of Contents](#-table-of-content)
+
+
+
+Congratulations you made it to the END.
