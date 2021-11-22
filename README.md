@@ -422,6 +422,7 @@ astra:
 Have a look to the code of [`Test01_Connectivity`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test01_Connectivity.java) here we use the `CqlSession` and `AstraClient` to show some infromations regarding your Astra DB. Execute the test with:
 
 ```bash
+cd /workspace/workshop-spring-reactive
 mvn test -Dtest=com.datastax.workshop.petclinic.Test01_Connectivity
 ```
 
@@ -665,7 +666,7 @@ This is it for the Hands-on TODAY. The angular project is a separated project on
 
 ## 12. Homeworks
 
-<img src="images/petclinic-workshop.png?raw=true" width="200" align="right" />
+<img src="doc/img/badge-petclinic.png?raw=true" width="200" align="right" />
 
 Don't forget to complete your assignment and get your verified skill badge! Finish and submit your homework!
 
