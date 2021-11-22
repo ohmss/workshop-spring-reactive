@@ -14,8 +14,6 @@ This sample is a fully reactive version of the Spring PetClinic application usin
 
 ## 📋 Table of content
 
-<img src="https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/doc/img/ui-top.png?raw=true" align="right" width="400px"/>
-
 <img src="https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/doc/img/ui-veterinarians.png?raw=true" align="right" width="400px"/>
 
 1. [Objectives](#1-objectives)
