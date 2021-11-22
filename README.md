@@ -85,7 +85,7 @@ Attending the session is not enough. You need to complete the homeworks detailed
 It doesn't matter if you join our workshop live or you prefer to work at your own pace,
 we have you covered. In this repository, you'll find everything you need for this workshop:
 
-- [Slide deck](doc/slides.pdf)
+- [Slide deck](doc/slides/slides.pdf)
 - [Datastax Developers Discord chat](https://bit.ly/cassandra-workshop)
 - [Questions and Answers](https://community.datastax.com/)
 
