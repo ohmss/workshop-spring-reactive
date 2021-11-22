@@ -443,7 +443,7 @@ workshops : id=3ed83de7-d97f-4fb6-bf9f-82e9f7eafa23, region=eu-west-1
 
 #### ✅ 8a. The CqlSession
 
-The integration to Cassandra is always implemented through the `CqlSession`. A first way to implement a DAO is to just use this object explicitely. Check the code of [`Test02_DaoWithCqlSession`]https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test02_WorkingWithDao.java) and run the following test:
+The integration to Cassandra is always implemented through the `CqlSession`. A first way to implement a DAO is to just use this object explicitely. Check the code of [`Test02_DaoWithCqlSession`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test02_WorkingWithDao.java) and run the following test:
 
 ```bash
 mvn test -Dtest=com.datastax.workshop.petclinic.Test02_DaoWithCqlSession
