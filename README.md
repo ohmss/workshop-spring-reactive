@@ -14,7 +14,7 @@
 This sample is a fully reactive version of the [Spring PetClinic](https://projects.spring.io/spring-petclinic/) application using [Spring WebFlux](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html)
 <!--- ENDEXCLUDE --->
 
-## 📋 Table of content
+## 📋 Table of contents
 
 <img src="https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/doc/img/ui-veterinarians.png?raw=true" align="right" width="400px"/>
 
@@ -36,15 +36,15 @@ This sample is a fully reactive version of the [Spring PetClinic](https://projec
 * *Learn how Apache Cassandra **data modelling** is different from relational*
 * *Understand how **Java Applications** connect to Apache Cassandra™*
 * *Learn about **Spring and Spring Boot** Microservices*
-* *Understand what are the benefit of **Reactive Programming*** 
-* ***Get a working full stack application Spring Boot-Data-Reactive***
+* *Understand what are the benefits of **Reactive Programming*** 
+* ***Get a working full stack application Spring Boot-Data-Reactive including a Node.js application for populating data***
 
 [🏠 Back to Table of Contents](#-table-of-content)
 
 ## 2. Frequently asked questions
 <p/>
 <details>
-<summary><b> 1️⃣ Can I run the workshop on my computer?</b></summary>
+<summary><b> 1️⃣ Can I run this workshop on my computer?</b></summary>
 <hr>
 <p>There is nothing preventing you from running the workshop on your own machine, If you do so, you will need the following
 <ol>
@@ -58,7 +58,7 @@ In this readme, we try to provide instructions for local development as well - b
 </details>
 <p/>
 <details>
-<summary><b> 2️⃣ What other prerequisites are there?</b></summary>
+<summary><b> 2️⃣ What other prerequisites are required?</b></summary>
 <hr>
 <ul>
 <li>You will need a GitHub account
@@ -125,7 +125,7 @@ The status will change to `Active` when the database is ready, this will only ta
 
 **👁️ Walkthrough**
 
-*The Walkthrough mentionned the wrong keyspace, make sure to use `spring_petclinic`*
+*The Walkthrough mentions the wrong keyspace, make sure to use `spring_petclinic`*
 
 ![image](doc/img/astra-create-db.gif?raw=true)
 
@@ -137,9 +137,11 @@ The status will change to `Active` when the database is ready, this will only ta
 
 As seen in the slides on the contrary of relational you start with the request and data model BEFORE CODING.
 
+Let's start with the CQL console for the database as whown below.
+
 ![image](doc/img/db-cqlconsole-1.png?raw=true)
 
- Let's create the tables. In the console use the command:
+Next, let's create the tables. In the CQL console use the command:
 
 ```sql
 use spring_petclinic;
@@ -149,7 +151,7 @@ use spring_petclinic;
 
 #### ✅ 5b. Create tables
 
-This is the data model we are looking for with 6 tables.
+Following is the data model we are looking for with 6 tables.
 
 ![Pet Clinic Welcome Screen](doc/img/data-model.png?raw=true)
 
@@ -242,7 +244,7 @@ VALUES ('vet_specialty', {'radiology', 'dentistry', 'surgery'});
 
 ## 6. Create Astra Token
 
-To connect to the database from Java code we need some credentials, this is what we are doing here.
+To connect to the database from Java code we need some credentials, this is what we are going to do here.
 
 #### ✅ 6a. Generate Token
 
@@ -266,9 +268,9 @@ This is what the token page looks like. You can now download the values as a CSV
 
 Notice the clipboard icon at the end of each value.
 
-- `clientId:` We will use it as a _username_ to contact Cassandra
+- `clientId:` We will use it as a _username_ to contact to the Cassandra database
 
-- `clientSecret:` We will use it as a _password_ to contact Cassandra
+- `clientSecret:` We will use it as a _password_ to contact to the Cassandra database
 
 - `appToken:` We will use it as a api token Key to interact with APIs.
 
@@ -294,18 +296,18 @@ Click the button below it should route you to your workspace:
 When you first launch gitpod, it builds the image.
 ![image](doc/img/building-workspace.png?raw=true)
 
-Git pod pulls the image.
+Gitpod pulls the image.
 ![image](doc/img/pulling-image.png?raw=true)
 
 
 #### 📘 Home Screen
 
-This is the home Screen. It is a VSCode instance in the cloud. As you can seeNotice multiple panels are opens with 2 terminals, the readme and the explorer. 
+This is the home Screen. It is a VSCode instance in the cloud. As you can see, notice multiple panels are open with 2 terminals, the readme and the explorer. 
 ![image](doc/img/start-ui.png?raw=true)
 
 #### 📘 How to open a new terminal
 
-You can open a new terminal from the menu in the ellipsis in the top left hand corner. Then use the Switch termina panel to move from another.
+You can open a new terminal from the menu in the ellipsis in the top left hand corner. Then use the Switch terminal panel to move from one to another.
 ![image](doc/img/gitpod-new-terminal.png?raw=true)
 
 
@@ -314,10 +316,10 @@ You can open a new terminal from the menu in the ellipsis in the top left hand c
 
 - **📘 All tools are installed**
 
-Gitpod provide everything you need to work with JAVA, NODEJS (but also python, docker and many more). Open a new **TERMINAL** and enter the following command.
+Gitpod provides everything you need to work with JAVA, Node.JS (but also python, docker and many more). Open a new **TERMINAL** and enter the following command.
 
 #### ⚠️ COPY-PASTE IN GITPOD
-> *Some browser might block the CTRL+C and CRTL+V if that happen you can paste with right-click and paste.*
+> *Some browsers might block the CTRL+C and CRTL+V if that happen you can paste with right-click and paste.*
 
 >*The first time you paste something in Gitpod your might have a pop-up telling you to accept the command*
 
@@ -374,27 +376,27 @@ npm -v
 
 - **📘 Remote explorer**
 
-In the tutorial we will also work with the preview and the remote explorer. To switch from source explorer to remove explorer local the dekstop icon on the menu bar in the left (6th item).
+In the tutorial we will also work with the preview and the remote explorer. To switch from source explorer to remote explorer click on dekstop icon on the menu bar in the left (6th item from top).
 
 ![image](doc/img/gitpod-remote-explorer.png?raw=true)
 
 - **📘 Simple Browser preview**
 
-As of now **nothing IS running** but if you want to open a preview or a new browser use the icons as show below.
+As of now **nothing IS running** but if you want to open a preview or a new browser use the icons as shown below.
 
 ![image](doc/img/gitpod-preview.png?raw=true)
 
 
 #### ✅ 7c. Setup your application
 
-Locate the File `application.yaml` in the folder `src/main/resources`, there your 3 properties to update marked with `CHANGE_ME`.
+Locate the File `application.yaml` in the folder `src/main/resources`, there your 3 properties that need to be updated marked with `CHANGE_ME`.
 
 - Open the file
 ```bash
  gp open /workspace/workshop-spring-reactive/src/main/resources/application.yml
  ```
 
-- Edit the `CHANGE_ME` properties
+- Edit the lines with the `CHANGE_ME` to include the database properties.
 
 ```yaml
 # Enforce listening on port 9966
@@ -414,14 +416,14 @@ astra:
 - *The DatabaseID is located on the home page*
 ![Pet Clinic Welcome Screen](doc/img/astra-config-1.png?raw=true)
 
-- *The Database region (adn keyspace) are located in the details page*
+- *The Database region (and keyspace) are located in the details page*
 ![Pet Clinic Welcome Screen](doc/img/astra-config-2.png?raw=true)
 
-- *Make sure the Token local like `AstraCS:xxxxxxxxxxx:yyyyyyyyyyy`*
+- *Make sure the Token looks something like (with AstraCS: preceeding `AstraCS:xxxxxxxxxxx:yyyyyyyyyyy`*
 
 #### ✅ 7d. Validate your setup
 
-Have a look to the code of [`Test01_Connectivity`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test01_Connectivity.java) here we use the `CqlSession` and `AstraClient` to show some infromations regarding your Astra DB. Execute the test with:
+Take a look at the code of [`Test01_Connectivity`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test01_Connectivity.java) here we use the `CqlSession` and `AstraClient` to show some infromation regarding your Astra DB. Execute the test with:
 
 ```bash
 cd /workspace/workshop-spring-reactive
@@ -446,15 +448,15 @@ workshops : id=3ed83de7-d97f-4fb6-bf9f-82e9f7eafa23, region=eu-west-1
 
 #### ✅ 8a. The CqlSession
 
-The integration to Cassandra is always implemented through the `CqlSession`. A first way to implement a DAO is to just use this object explicitely. Check the code of [`Test02_DaoWithCqlSession`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test02_WorkingWithDao.java) and run the following test:
+The integration to Cassandra is always implemented through the `CqlSession`. A first way to implement a DAO is to just use this object explicitly. Check the code at [`Test02_DaoWithCqlSession`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test02_DaoWithCqlSession.java) and run the following test:
 
 ```bash
 mvn test -Dtest=com.datastax.workshop.petclinic.Test02_DaoWithCqlSession
 ```
 
-Notice how you need to put a terminal call `block()` or the treatment is not started.
+1. Notice how you needed to put a terminal call `block()` on line 21 or the program is not started.
 
-Project [Reactor](https://projectreactor.io/) is a fourth-generation reactive library, based on the Reactive Streams specification, for building non-blocking applications on the JVM. We are using the library reactor-test introducing `StepVerifier` to ease to coding of unit tests:
+Project [Reactor](https://projectreactor.io/) is a fourth-generation reactive library, based on the Reactive Streams specification, for building non-blocking applications on the JVM. We are using the library reactor-test introducing `StepVerifier` to ease the coding of unit tests:
 
 ```java
 @Test
@@ -509,7 +511,7 @@ mvn test -Dtest=com.datastax.workshop.petclinic.Test03_DaoWithDriverObjectMappin
 
 ## 9. Working with Spring Data
 
-[Spring Data](https://spring.io/projects/spring-data) provides a common astraction on top of multiple databases leveraging JPA. The quantity of code is greatly reduce by working with interfaces `CrudRepository` and entities.
+[Spring Data](https://spring.io/projects/spring-data) provides a common abstraction on top of multiple databases leveraging JPA. The quantity of code is greatly reduced by working with interfaces `CrudRepository` and entities.
 
 - Define an entity [`VetEntitySpring`]() where object attributes matches the table columns. You can notice that the set of annotations is not the same as with java driver mapper.
 
@@ -540,7 +542,7 @@ mvn test -Dtest=com.datastax.workshop.petclinic.Test04_DaoWithSpringData
 
 *Both web frameworks mirror the names of their source modules (spring-webmvc and spring-webflux) and co-exist side by side in the Spring Framework. Each module is optional. Applications can use one or the other module or, in some cases, both — for example, Spring MVC controllers with the reactive WebClient.*
 
-The different DAO we created are injected into a Rest controller. (same as Spring WEB)
+The different DAO we created is injected into a Rest controller. (same as Spring WEB)
 
 ```java
 @RestController
@@ -580,7 +582,7 @@ public class VetSpecialtyController {
 }
 ```
 
-You can now go ahead and start the application. The application is listening on port `9966` as defined in `application.yaml` *(Please do not change this, this is waht the user interface is looking for)*
+You can now go ahead and start the application. The application is listening on port `9966` as defined in `application.yaml` *(Please do not change this, this is what the user interface is looking for)*
 
 
 Start the application;
@@ -589,6 +591,7 @@ mvn spring-boot:run
 ```
 
 Open your browser on port `9966` using the the remote explorer or entering in a new terminal.
+
 ```bash
 gp preview "$(gp url 9966)"
 ```
@@ -599,7 +602,7 @@ You should find the Nice user interface:
 
 #### ✅ 10c. Use API
 
-Locate the resource `Veterinarian Specialties Api` and speciallty the method below to test the service.
+Locate the resource `Veterinarian Specialties Api` and  method the specialities endpoint below to test the service.
 
 ```bash
 GET ​/petclinic​/api​/specialties
@@ -662,7 +665,7 @@ gp preview "$(gp url 4200)"
 
 ![Pet Clinic Welcome Screen](doc/img/ui-top.png?raw=true)
 
-This is it for the Hands-on TODAY. The angular project is a separated project on its own and we simply reuse it as a submodule but did not code anything there.
+This is it for the Hands-on TODAY. The angular project is a separate project on its own and we simply reuse it as a submodule but did not code anything there.
 
 [🏠 Back to Table of Contents](#-table-of-content)
 
