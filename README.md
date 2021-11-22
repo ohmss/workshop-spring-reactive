@@ -673,7 +673,7 @@ Don't forget to complete your assignment and get your verified skill badge! Fini
 1. Complete the practice steps as described below until you have your own app running in Gitpod.
 2. Answer the technical questions in the form (We promise, it is NOT difficult if you follow the workshop).
 3. Add a funny PET TYPE in the DATABASE and take a SCREENSHOT of the running app with your data.
-4. Submit your homework [here](https://dtsx.io/petclinic-homework).
+4. Submit your homework [here](https://dtsx.io/homework-spring-reactive)
 
 5. *(totally optional)* Challenge for 🌶️🌶️🌶️ EXTRA SPICE 🌶️🌶️🌶️. Fork the project, change the code for more repositories to use Spring Data (replacing the Java drivers) and do a pull request. 👕 If the submission has a good quality we will ship a SWAG BOX for free.
 
