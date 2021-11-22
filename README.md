@@ -623,7 +623,7 @@ Keep the application running on the first terminal. We need our backend. Let'us 
 
 #### ✅ 11a. Start the front end
 
-On the terminal `spring-petclinic-angular:bash` navigate to the Angular application.
+On the terminal `spring-petclinic-angular:npm` navigate to the Angular application.
 
 ```bash
 chunk {main} main.js, main.js.map (main) 331 kB [initial] [rendered]
