@@ -618,7 +618,7 @@ To execute the service expand the method, locate the button `[TRY IT OUT]`
 
 ![Pet Clinic Welcome Screen](doc/img/tryit-1.png?raw=true)
 
-Click `[EXECUTE]`, this particular method does not take any argument.
+Click `[Execute]`, this particular method does not take any argument.
 
 ![Pet Clinic Welcome Screen](doc/img/tryit-2.png?raw=true)
 
