@@ -2,9 +2,9 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  # ------------------------------------
-  # SETUP CQLSH 
-  # ------------------------------------
+  # --------------------------------------
+  #  SETUP CQLSH and Create DB Workshop
+  # --------------------------------------
   - name: setup-cqlsh
     env:
         CQLENG_ALLOW_SCHEMA_MANAGEMENT: 1
@@ -65,7 +65,6 @@ github:
 
 vscode:
   extensions:
-    - cool2k.vscode-lombok
-    - datastax.astra-for-vs-code
+    - GabrielBB.vscode-lombok
     - vscjava.vscode-java-pack
     - Pivotal.vscode-boot-dev-pack

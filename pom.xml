@@ -20,25 +20,24 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		
 		<springfox.version>3.0.0</springfox.version>
-		<astra-sdk.version>0.2.2</astra-sdk.version>
+		<astra-sdk.version>0.3.0</astra-sdk.version>
 		<slf4j.version>1.7.30</slf4j.version>
-		<cassandra-java-driver.version>4.13.0</cassandra-java-driver.version>
+		<cassandra-java-driver.version>4.14.0</cassandra-java-driver.version>
 		<maven.test.skip>false</maven.test.skip>
 	</properties>
 
 	<dependencies>
 
-		<!-- Reactive REST API -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
-		</dependency>
-		
 		<!-- Api documentation -->
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-boot-starter</artifactId>
 			<version>${springfox.version}</version>
+		</dependency>
+		<!-- Reactive REST API -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 		
 		<!-- Cassandra  -->
