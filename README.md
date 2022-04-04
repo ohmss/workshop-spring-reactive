@@ -1,5 +1,6 @@
 <!--- STARTEXCLUDE --->
-# Workshop 🐈 Spring PetClinic Reactive 🐕 
+
+# Workshop 🐈 Spring PetClinic Reactive 🐕
 
 <img src="doc/img/badge-petclinic.png?raw=true" width="200" align="right" />
 
@@ -7,11 +8,12 @@
 [![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
 
-*120 minutes (Live workshop) 50 minutes (self-paced), Intermediate, [Start Building](#2-frequently-asked-questions)*
+_120 minutes (Live workshop) 50 minutes (self-paced), Intermediate, [Start Building](#2-frequently-asked-questions)_
 
 ![banner](doc/img/banner.png?raw=true)
 
 This sample is a fully reactive version of the [Spring PetClinic](https://projects.spring.io/spring-petclinic/) application using [Spring WebFlux](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html)
+
 <!--- ENDEXCLUDE --->
 
 ## 📋 Table of contents
@@ -33,15 +35,16 @@ This sample is a fully reactive version of the [Spring PetClinic](https://projec
 
 ## 1. Objectives
 
-* *Learn how Apache Cassandra **data modelling** is different from relational*
-* *Understand how **Java Applications** connect to Apache Cassandra™*
-* *Learn about **Spring and Spring Boot** Microservices*
-* *Understand what are the benefits of **Reactive Programming*** 
-* ***Get a working full stack application Spring Boot-Data-Reactive including a Node.js application for populating data***
+- _Learn how Apache Cassandra **data modelling** is different from relational_
+- _Understand how **Java Applications** connect to Apache Cassandra™_
+- _Learn about **Spring and Spring Boot** Microservices_
+- \*Understand what are the benefits of **Reactive Programming\***
+- **_Get a working full stack application Spring Boot-Data-Reactive including a Node.js application for populating data_**
 
 [🏠 Back to Table of Contents](#-table-of-content)
 
 ## 2. Frequently asked questions
+
 <p/>
 <details>
 <summary><b> 1️⃣ Can I run this workshop on my computer?</b></summary>
@@ -80,8 +83,6 @@ Attending the session is not enough. You need to complete the homeworks detailed
 </details>
 <p/>
 
-[🏠 Back to Table of Contents](#-table-of-content)
-
 ## 3. Materials for the Session
 
 It doesn't matter if you join our workshop live or you prefer to work at your own pace,
@@ -95,37 +96,25 @@ we have you covered. In this repository, you'll find everything you need for thi
 
 ## 4. Create Astra DB Instance
 
-**`ASTRA DB`** is the simplest way to run Cassandra with zero operations at all - just push the button and get your cluster. No credit card required, $25.00 USD credit every month, roughly 20M read/write operations, 80GB storage monthly - sufficient to run small production workloads.
+#### ✅ 4a.Register or Sign to Astra
 
-#### ✅ 4a. Register 
+> 📖 [Documentation to create Astra Account](https://awesome-astra.github.io/docs/pages/astra/create-account/)
 
-If you do have an account yet register and sign In to Astra DB this is FREE and NO CREDIT CARD asked. [https://astra.datastax.com](https://astra.dev/11-22): You can use your `Github`, `Google` accounts or register with an `email`.
+[![](https://dabuttonfactory.com/button.png?t=+Connect+to+Astra&f=Open+Sans-Bold&ts=12&tc=fff&hp=23&vp=16&c=11&bgt=gradient&bgc=0b5394&ebgc=073763)]()
 
-_Make sure to chose a password with minimum 8 characters, containing upper and lowercase letters, at least one number and special character_
+#### ✅ 4c.Create a Database (or resume your database)
 
-#### ✅ 4b. Create a "FREE" plan
+> 📖 [Documentation to create a Database](https://awesome-astra.github.io/docs/pages/astra/create-instance/)
 
-Follow this [guide](https://docs.datastax.com/en/astra/docs/creating-your-astra-database.html), to set up a pay as you go database with a free $25 monthly credit. You will find below recommended values to enter:
+Those are the values you need to enter:
 
-- **For the database name** - `workshops`
+| Parameter     | Value                           |
+| ------------- | ------------------------------- |
+| Database name | `workshops`                     |
+| Keyspace name | `spring_petclinic`              |
+| Region name   | The one you like, no difference |
 
-- **For the keyspace name** - `spring_petclinic`
-
-_You can technically use whatever you want and update the code to reflect the keyspace. This is really to get you on a happy path for the first run._
-
-- **For provider and region**: Choose a provider (GCP, Azure or AWS) and then the related region is where your database will reside physically (choose one close to you or your users).
-
-- **Create the database**. Review all the fields to make sure they are as shown, and click the `Create Database` button.
-
-You will see your new database `pending` in the Dashboard.
-
-![my-pic](doc/img//db-pending.png?raw=true)
-
-The status will change to `Active` when the database is ready, this will only take 2-3 minutes. You will also receive an email when it is ready.
-
-**👁️ Walkthrough**
-
-*The Walkthrough mentions the wrong keyspace, make sure to use `spring_petclinic`*
+**Walkthrough:** _The Walkthrough mentions the wrong keyspace, make sure to use `spring_petclinic`_
 
 ![image](doc/img/astra-create-db.gif?raw=true)
 
@@ -233,10 +222,10 @@ describe tables;
 #### ✅ 5d. Insert Reference Data
 
 ```sql
-INSERT INTO petclinic_reference_lists(list_name, values) 
+INSERT INTO petclinic_reference_lists(list_name, values)
 VALUES ('pet_type ', {'bird', 'cat', 'dog', 'lizard','hamster','snake'});
 
-INSERT INTO petclinic_reference_lists(list_name, values) 
+INSERT INTO petclinic_reference_lists(list_name, values)
 VALUES ('vet_specialty', {'radiology', 'dentistry', 'surgery'});
 ```
 
@@ -299,10 +288,9 @@ When you first launch gitpod, it builds the image.
 Gitpod pulls the image.
 ![image](doc/img/pulling-image.png?raw=true)
 
-
 #### 📘 Home Screen
 
-This is the home Screen. It is a VSCode instance in the cloud. As you can see, notice multiple panels are open with 2 terminals, the readme and the explorer. 
+This is the home Screen. It is a VSCode instance in the cloud. As you can see, notice multiple panels are open with 2 terminals, the readme and the explorer.
 ![image](doc/img/start-ui.png?raw=true)
 
 #### 📘 How to open a new terminal
@@ -310,18 +298,17 @@ This is the home Screen. It is a VSCode instance in the cloud. As you can see, n
 You can open a new terminal from the menu in the ellipsis in the top left hand corner. Then use the Switch terminal panel to move from one to another.
 ![image](doc/img/gitpod-new-terminal.png?raw=true)
 
-
 #### ✅ 7b. Know your gitpod
-
 
 - **📘 All tools are installed**
 
 Gitpod provides everything you need to work with JAVA, Node.JS (but also python, docker and many more). Open a new **TERMINAL** and enter the following command.
 
 #### ⚠️ COPY-PASTE IN GITPOD
-> *Some browsers might block the CTRL+C and CRTL+V if that happen you can paste with right-click and paste.*
 
->*The first time you paste something in Gitpod your might have a pop-up telling you to accept the command*
+> _Some browsers might block the CTRL+C and CRTL+V if that happen you can paste with right-click and paste._
+
+> _The first time you paste something in Gitpod your might have a pop-up telling you to accept the command_
 
 - Check Java Version
 
@@ -330,6 +317,7 @@ java --version
 ```
 
 > 🖥️ Expected output
+
 ```
 Picked up JAVA_TOOL_OPTIONS: -Xmx2576m
 openjdk 11.0.11 2021-04-20 LTS
@@ -338,11 +326,13 @@ OpenJDK 64-Bit Server VM Zulu11.48+21-CA (build 11.0.11+9-LTS, mixed mode)
 ```
 
 - Check Maven version
+
 ```bash
 mvn -v
 ```
 
 > 🖥️ Expected output
+
 ```
 Picked up JAVA_TOOL_OPTIONS: -Xmx2576m
 Apache Maven 3.8.1 (05c21c65bdfed0f71a2f2ada8b84da59348c4c5d)
@@ -359,6 +349,7 @@ node -v
 ```
 
 > 🖥️ Expected output
+
 ```
 v14.17.0
 ```
@@ -370,6 +361,7 @@ npm -v
 ```
 
 > 🖥️ Expected output
+
 ```
 6.14.13
 ```
@@ -386,15 +378,15 @@ As of now **nothing IS running** but if you want to open a preview or a new brow
 
 ![image](doc/img/gitpod-preview.png?raw=true)
 
-
 #### ✅ 7c. Setup your application
 
 Locate the File `application.yaml` in the folder `src/main/resources`, there your 3 properties that need to be updated marked with `CHANGE_ME`.
 
 - Open the file
+
 ```bash
  gp open /workspace/workshop-spring-reactive/src/main/resources/application.yml
- ```
+```
 
 - Edit the lines with the `CHANGE_ME` to include the database properties.
 
@@ -402,7 +394,7 @@ Locate the File `application.yaml` in the folder `src/main/resources`, there you
 # Enforce listening on port 9966
 server:
   port: 9966
-    
+
 # Setup your application
 astra:
   application-token: <CHANGE_ME>
@@ -413,13 +405,13 @@ astra:
     enabled: false
 ```
 
-- *The DatabaseID is located on the home page*
-![Pet Clinic Welcome Screen](doc/img/astra-config-1.png?raw=true)
+- _The DatabaseID is located on the home page_
+  ![Pet Clinic Welcome Screen](doc/img/astra-config-1.png?raw=true)
 
-- *The Database region (and keyspace) are located in the details page*
-![Pet Clinic Welcome Screen](doc/img/astra-config-2.png?raw=true)
+- _The Database region (and keyspace) are located in the details page_
+  ![Pet Clinic Welcome Screen](doc/img/astra-config-2.png?raw=true)
 
-- *Make sure the Token looks something like (with AstraCS: preceeding `AstraCS:xxxxxxxxxxx:yyyyyyyyyyy`*
+- _Make sure the Token looks something like (with AstraCS: preceeding `AstraCS:xxxxxxxxxxx:yyyyyyyyyyy`_
 
 #### ✅ 7d. Validate your setup
 
@@ -431,14 +423,15 @@ mvn test -Dtest=com.datastax.workshop.petclinic.Test01_Connectivity
 ```
 
 > 🖥️ Expected output
+
 ```bash
 == CQL_SESSION ==
 + Your Keyspace: spring_petclinic
-+ Vet Specialty: 
++ Vet Specialty:
 [dentistry, radiology, surgery]
 == ASTRA ==
 + Your OrganizationID: f9460f14-9879-4ebe-83f2-48d3f3dce13c
-+ Your Databases: 
++ Your Databases:
 workshops : id=3ed83de7-d97f-4fb6-bf9f-82e9f7eafa23, region=eu-west-1
 ```
 
@@ -463,7 +456,7 @@ Project [Reactor](https://projectreactor.io/) is a fourth-generation reactive li
 public void should_list_vet_specialies() {
  System.out.println(referenceListDao
    .findReferenceList("vet_specialty").block());
-        
+
  StepVerifier
   .create(referenceListDao.findReferenceList("vet_specialty"))
   .expectNext(Set.of("dentistry", "radiology", "surgery"))
@@ -471,7 +464,9 @@ public void should_list_vet_specialies() {
   .verify();
 }
 ```
+
 > 🖥️ Expected output
+
 ```
 15:34:33.926 INFO  com.datastax.workshop.petclinic.Test02_DaoWithCqlSession : Started Test02_DaoWithCqlSession in 14.782 seconds (JVM running for 16.99)
 [dentistry, radiology, surgery]
@@ -484,7 +479,7 @@ We will illustrate this with the `Vet` in this [package](https://github.com/data
 
 1.  Define an `@Entity` where object attributes matches the table columns [`VetEntity`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/main/java/com/datastax/workshop/petclinic/vet/db/VetEntity.java)
 
-2. Define an `@Dao` interface with only the method you want to implements [`VetReactiveDao`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/main/java/com/datastax/workshop/petclinic/vet/db/VetReactiveDao.java)
+2.  Define an `@Dao` interface with only the method you want to implements [`VetReactiveDao`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/main/java/com/datastax/workshop/petclinic/vet/db/VetReactiveDao.java)
 
 ```java
 @Dao
@@ -525,7 +520,7 @@ mvn test -Dtest=com.datastax.workshop.petclinic.Test03_DaoWithDriverObjectMappin
 
 ```java
 @Repository
-public interface VetRepositorySpring 
+public interface VetRepositorySpring
    extends ReactiveCassandraRepository<VetEntitySpring, UUID> {
 }
 ```
@@ -544,9 +539,9 @@ mvn test -Dtest=com.datastax.workshop.petclinic.Test04_DaoWithSpringData
 
 > [Reference Documentation](https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html)
 
-*The original web framework included in the Spring Framework, Spring Web MVC, was purpose-built for the Servlet API and Servlet containers. The reactive-stack web framework, Spring WebFlux, was added later in version 5.0. It is fully non-blocking, supports Reactive Streams back pressure, and runs on such servers as Netty, Undertow, and Servlet 3.1+ containers.*
+_The original web framework included in the Spring Framework, Spring Web MVC, was purpose-built for the Servlet API and Servlet containers. The reactive-stack web framework, Spring WebFlux, was added later in version 5.0. It is fully non-blocking, supports Reactive Streams back pressure, and runs on such servers as Netty, Undertow, and Servlet 3.1+ containers._
 
-*Both web frameworks mirror the names of their source modules (spring-webmvc and spring-webflux) and co-exist side by side in the Spring Framework. Each module is optional. Applications can use one or the other module or, in some cases, both — for example, Spring MVC controllers with the reactive WebClient.*
+_Both web frameworks mirror the names of their source modules (spring-webmvc and spring-webflux) and co-exist side by side in the Spring Framework. Each module is optional. Applications can use one or the other module or, in some cases, both — for example, Spring MVC controllers with the reactive WebClient._
 
 The different DAO we created is injected into a Rest controller. (same as Spring WEB)
 
@@ -554,7 +549,7 @@ The different DAO we created is injected into a Rest controller. (same as Spring
 @RestController
 @RequestMapping("/petclinic/api/specialties")
 public class VetSpecialtyController {
- 
+
  @Autowired
  ReferenceListReactiveDao dao;
 
@@ -588,10 +583,10 @@ public class VetSpecialtyController {
 }
 ```
 
-You can now go ahead and start the application. The application is listening on port `9966` as defined in `application.yaml` *(Please do not change this, this is what the user interface is looking for)*
-
+You can now go ahead and start the application. The application is listening on port `9966` as defined in `application.yaml` _(Please do not change this, this is what the user interface is looking for)_
 
 Start the application;
+
 ```bash
 mvn spring-boot:run
 ```
@@ -608,13 +603,13 @@ You should find the Nice user interface:
 
 #### ✅ 10c. Use API
 
-Locate the resource `Veterinarian Specialties Api` and  method the specialities endpoint below to test the service.
+Locate the resource `Veterinarian Specialties Api` and method the specialities endpoint below to test the service.
 
 ```bash
 GET ​/petclinic​/api​/specialties
 ```
 
-To execute the service expand the method, locate the button `[TRY IT OUT]` 
+To execute the service expand the method, locate the button `[TRY IT OUT]`
 
 ![Pet Clinic Welcome Screen](doc/img/tryit-1.png?raw=true)
 
@@ -629,9 +624,9 @@ You should see a response something like below.
 
 ## 11. Angular User Interface
 
->[Reference Documentation](https://spring-petclinic.github.io/spring-petclinic-angular/)
+> [Reference Documentation](https://spring-petclinic.github.io/spring-petclinic-angular/)
 
->[Source Code](https://github.com/spring-petclinic/spring-petclinic-angular/tree/4f58177e29476a4866723a7edc6dab614e96eec0)
+> [Source Code](https://github.com/spring-petclinic/spring-petclinic-angular/tree/4f58177e29476a4866723a7edc6dab614e96eec0)
 
 Keep the application running on the first terminal. We need our backend. Let'us start the user interface.
 
@@ -658,13 +653,13 @@ CTRL+C
 ```
 
 - Start the application again
+
 ```
  cd /workspace/workshop-spring-reactive/spring-petclinic-angular
  npm run start
 ```
 
 #### ✅ 11b. Open the user interface
-
 
 Open your browser on port `4200` using the the remote explorer or entering in a new terminal.
 
@@ -689,10 +684,8 @@ Don't forget to complete your assignment and get your verified skill badge! Fini
 3. Add a funny PET TYPE in the DATABASE and take a SCREENSHOT of the running app with your data.
 4. Submit your homework [here](https://dtsx.io/homework-spring-reactive)
 
-5. *(totally optional)* Challenge for 🌶️🌶️🌶️ EXTRA SPICE 🌶️🌶️🌶️. Fork the project, change the code for more repositories to use Spring Data (replacing the Java drivers) and do a pull request. 👕 If the submission has a good quality we will ship a SWAG BOX for free.
+5. _(totally optional)_ Challenge for 🌶️🌶️🌶️ EXTRA SPICE 🌶️🌶️🌶️. Fork the project, change the code for more repositories to use Spring Data (replacing the Java drivers) and do a pull request. 👕 If the submission has a good quality we will ship a SWAG BOX for free.
 
 [🏠 Back to Table of Contents](#-table-of-content)
-
-
 
 Congratulations you made it to the END.
