@@ -35,13 +35,15 @@ This sample is a fully reactive version of the [Spring PetClinic](https://projec
 
 ## 1. Objectives
 
-- _Learn how Apache Cassandra **data modelling** is different from relational_
-- _Understand how **Java Applications** connect to Apache Cassandra™_
-- _Learn about **Spring and Spring Boot** Microservices_
-- \*Understand what are the benefits of **Reactive Programming\***
-- **_Get a working full stack application Spring Boot-Data-Reactive including a Node.js application for populating data_**
+✅ Learn how Apache Cassandra **data modelling** is different from relational
 
-[🏠 Back to Table of Contents](#-table-of-content)
+✅ Understand how **Java Applications** connect to Apache Cassandra™
+
+✅ Learn about **Spring and Spring Boot** Microservices
+
+✅ Understand what are the benefits of **Reactive Programming**
+
+✅ **Get a working full stack application Spring Boot-Data-Reactive including a Node.js application for populating data**
 
 ## 2. Frequently asked questions
 
@@ -98,15 +100,15 @@ we have you covered. In this repository, you'll find everything you need for thi
 
 #### ✅ 4a.Register or Sign to Astra
 
-> 📖 [Documentation to create Astra Account](https://awesome-astra.github.io/docs/pages/astra/create-account/)
+> 📖 DOCUMENTATION: [How to create an Astra Account](https://awesome-astra.github.io/docs/pages/astra/create-account/)
 
 [![](https://dabuttonfactory.com/button.png?t=+Connect+to+Astra&f=Open+Sans-Bold&ts=12&tc=fff&hp=23&vp=16&c=11&bgt=gradient&bgc=0b5394&ebgc=073763)]()
 
 #### ✅ 4c.Create a Database (or resume your database)
 
-> 📖 [Documentation to create a Database](https://awesome-astra.github.io/docs/pages/astra/create-instance/)
+> 📖 DOCUMENTATION: [How create a Database](https://awesome-astra.github.io/docs/pages/astra/create-instance/)
 
-Those are the values you need to enter:
+Use the following values:
 
 | Parameter     | Value                           |
 | ------------- | ------------------------------- |
