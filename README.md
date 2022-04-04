@@ -8,7 +8,7 @@
 [![License Apache2](https://img.shields.io/hexpm/l/plug.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 [![Discord](https://img.shields.io/discord/685554030159593522)](https://discord.com/widget?id=685554030159593522&theme=dark)
 
-_120 minutes (Live workshop) 50 minutes (self-paced), Intermediate, [Start Building](#2-frequently-asked-questions)_
+> ⚠️ Difficulty: **`Intermediate`, we expect you to already know Java and Spring.**
 
 ![banner](doc/img/banner.png?raw=true)
 
@@ -24,9 +24,9 @@ This sample is a fully reactive version of the [Spring PetClinic](https://projec
 2. [Frequently asked questions](#2-frequently-asked-questions)
 3. [Materials for the Session](#3-materials-for-the-session)
 4. [Create your Database](#4-create-astra-db-instance)
-5. [Create your Schema](#5-create-your-schema-with-cql-console)
-6. [Create your Token](#6-create-astra-token)
-7. [Start Gitpod and setup your application](#7-start-gitpod-and-setup-your-application)
+5. [Create your Token](#5-create-astra-token)
+6. [Start and setup Gitpod](#6-start-gitpod-and-setup-your-application)
+7. [Create your Schema](#7-create-your-schema-with-cql-console)
 8. [Working with Cassandra Drivers](#8-working-with-cassandra-drivers)
 9. [Working with Spring Data](#9-working-with-spring-data)
 10. [Working with Spring WebFlux](#10-working-with-spring-webflux)
@@ -120,165 +120,23 @@ Use the following values:
 
 [🏠 Back to Table of Contents](#-table-of-content)
 
-## 5. Create your schema with CQL Console
-
-#### ✅ 5a. Select keyspace in CQL Console
-
-As seen in the slides on the contrary of relational you start with the request and data model BEFORE CODING.
-
-Let's start with the CQL console for the database as whown below.
-
-![image](doc/img/db-cqlconsole-1.png?raw=true)
-
-Next, let's create the tables. In the CQL console use the command:
-
-```sql
-use spring_petclinic;
-```
-
-![image](doc/img/db-cqlconsole-2.png?raw=true)
-
-#### ✅ 5b. Create tables
-
-Following is the data model we are looking for with 6 tables.
-
-![Pet Clinic Welcome Screen](doc/img/data-model.png?raw=true)
-
-Execute the following in the cql console
-
-```sql
-DROP INDEX IF EXISTS petclinic_idx_vetname;
-DROP INDEX IF EXISTS petclinic_idx_ownername;
-DROP TABLE IF EXISTS petclinic_vet;
-DROP TABLE IF EXISTS petclinic_vet_by_specialty;
-DROP TABLE IF EXISTS petclinic_reference_lists;
-DROP TABLE IF EXISTS petclinic_owner;
-DROP TABLE IF EXISTS petclinic_pet_by_owner;
-DROP TABLE IF EXISTS petclinic_visit_by_pet;
-
-CREATE TABLE IF NOT EXISTS petclinic_vet (
-  id          uuid,
-  first_name  text,
-  last_name   text,
-  specialties set<text>,
-  PRIMARY KEY ((id))
-);
-
-
-CREATE TABLE IF NOT EXISTS petclinic_vet_by_specialty (
- specialty   text,
- vet_id      uuid,
- first_name  text,
- last_name   text,
- PRIMARY KEY ((specialty), vet_id)
-);
-
-
-CREATE TABLE IF NOT EXISTS petclinic_owner (
-  id         uuid,
-  first_name text,
-  last_name  text,
-  address    text,
-  city       text,
-  telephone  text,
-  PRIMARY KEY ((id))
-);
-
-CREATE TABLE IF NOT EXISTS petclinic_pet_by_owner (
-  owner_id   uuid,
-  pet_id     uuid,
-  pet_type   text,
-  name       text,
-  birth_date date,
-  PRIMARY KEY ((owner_id), pet_id)
-);
-
-CREATE TABLE IF NOT EXISTS petclinic_visit_by_pet (
-   pet_id      uuid,
-   visit_id    uuid,
-   visit_date  date,
-   description text,
-   PRIMARY KEY ((pet_id), visit_id)
-);
-
-CREATE TABLE IF NOT EXISTS petclinic_reference_lists (
-  list_name text,
-  values set<text>,
-  PRIMARY KEY ((list_name))
-);
-
-/** We could search veterinarians by their names. */
-CREATE INDEX IF NOT EXISTS petclinic_idx_ownername ON petclinic_owner(last_name);
-/** We could search vet by their names. */
-CREATE INDEX IF NOT EXISTS petclinic_idx_vetname ON petclinic_vet(last_name);
-```
-
-#### ✅ 5c. Check our 6 tables
-
-```sql
-describe tables;
-```
-
-#### ✅ 5d. Insert Reference Data
-
-```sql
-INSERT INTO petclinic_reference_lists(list_name, values)
-VALUES ('pet_type ', {'bird', 'cat', 'dog', 'lizard','hamster','snake'});
-
-INSERT INTO petclinic_reference_lists(list_name, values)
-VALUES ('vet_specialty', {'radiology', 'dentistry', 'surgery'});
-```
-
-[🏠 Back to Table of Contents](#-table-of-content)
-
-## 6. Create Astra Token
+## 5. Create Astra Token
 
 To connect to the database from Java code we need some credentials, this is what we are going to do here.
 
-#### ✅ 6a. Generate Token
+> 📖 DOCUMENTATION: [How to create an Astra Token](https://awesome-astra.github.io/docs/pages/astra/create-token/#c-procedure)
 
-Following the [Manage Application Tokens docs](https://docs.datastax.com/en/astra/docs/manage-application-tokens.html) create a token with `Database Admnistrator` roles.
-
-- Go the `Organization Settings`
-
-- Go to `Token Management`
-
-- Pick the role `Database Admnistrator` on the select box
-
-- Click Generate token
+| Parameter | Value                    |
+| --------- | ------------------------ |
+| Role      | `Database Administrator` |
 
 **👁️ Walkthrough**
 
 ![image](doc/img/astra-create-token.gif?raw=true)
 
-This is what the token page looks like. You can now download the values as a CSV. We will need those values but you can also keep this window open for use later.
+> ⚠️ We will use the third argument called `TOKEN`, make sure you copy it in the clip board.
 
-![image](doc/img/astra-token.png?raw=true)
-
-Notice the clipboard icon at the end of each value.
-
-- `clientId:` We will use it as a _username_ to contact to the Cassandra database
-
-- `clientSecret:` We will use it as a _password_ to contact to the Cassandra database
-
-- `appToken:` We will use it as a api token Key to interact with APIs.
-
-#### ✅ 6b. Copy your token in your clipboard
-
-To know more about roles of each token you can have a look to [this video.](https://www.youtube.com/watch?v=TUTCLsBuUd4&list=PL2g2h-wyI4SpWK1G3UaxXhzZc6aUFXbvL&index=8)
-
-**Note: Make sure you don't close the window accidentally or otherwise - if you close this window before you copy the values, the application token is lost forever. They won't be available later for security reasons.**
-
-We are now set with the database and credentials. Let's start coding with Spring !
-
-[🏠 Back to Table of Contents](#-table-of-content)
-
-### 7. Start Gitpod and Setup your application
-
-#### ✅ 7a. Open Gitpod
-
-Click the button below it should route you to your workspace:
-[https://gitpod.io/#https://github.com/datastaxdevs/workshop-spring-reactive](https://gitpod.io/#https://github.com/datastaxdevs/workshop-spring-reactive).
+### 6. Start and Setup Gitpod
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datastaxdevs/workshop-spring-reactive)
 
@@ -433,6 +291,117 @@ mvn test -Dtest=com.datastax.workshop.petclinic.Test01_Connectivity
 + Your OrganizationID: f9460f14-9879-4ebe-83f2-48d3f3dce13c
 + Your Databases:
 workshops : id=3ed83de7-d97f-4fb6-bf9f-82e9f7eafa23, region=eu-west-1
+```
+
+[🏠 Back to Table of Contents](#-table-of-content)
+
+## 5. Create your schema with CQL Console
+
+#### ✅ 5a. Select keyspace in CQL Console
+
+As seen in the slides on the contrary of relational you start with the request and data model BEFORE CODING.
+
+Let's start with the CQL console for the database as whown below.
+
+![image](doc/img/db-cqlconsole-1.png?raw=true)
+
+Next, let's create the tables. In the CQL console use the command:
+
+```sql
+use spring_petclinic;
+```
+
+![image](doc/img/db-cqlconsole-2.png?raw=true)
+
+#### ✅ 5b. Create tables
+
+Following is the data model we are looking for with 6 tables.
+
+![Pet Clinic Welcome Screen](doc/img/data-model.png?raw=true)
+
+Execute the following in the cql console
+
+```sql
+DROP INDEX IF EXISTS petclinic_idx_vetname;
+DROP INDEX IF EXISTS petclinic_idx_ownername;
+DROP TABLE IF EXISTS petclinic_vet;
+DROP TABLE IF EXISTS petclinic_vet_by_specialty;
+DROP TABLE IF EXISTS petclinic_reference_lists;
+DROP TABLE IF EXISTS petclinic_owner;
+DROP TABLE IF EXISTS petclinic_pet_by_owner;
+DROP TABLE IF EXISTS petclinic_visit_by_pet;
+
+CREATE TABLE IF NOT EXISTS petclinic_vet (
+  id          uuid,
+  first_name  text,
+  last_name   text,
+  specialties set<text>,
+  PRIMARY KEY ((id))
+);
+
+
+CREATE TABLE IF NOT EXISTS petclinic_vet_by_specialty (
+ specialty   text,
+ vet_id      uuid,
+ first_name  text,
+ last_name   text,
+ PRIMARY KEY ((specialty), vet_id)
+);
+
+
+CREATE TABLE IF NOT EXISTS petclinic_owner (
+  id         uuid,
+  first_name text,
+  last_name  text,
+  address    text,
+  city       text,
+  telephone  text,
+  PRIMARY KEY ((id))
+);
+
+CREATE TABLE IF NOT EXISTS petclinic_pet_by_owner (
+  owner_id   uuid,
+  pet_id     uuid,
+  pet_type   text,
+  name       text,
+  birth_date date,
+  PRIMARY KEY ((owner_id), pet_id)
+);
+
+CREATE TABLE IF NOT EXISTS petclinic_visit_by_pet (
+   pet_id      uuid,
+   visit_id    uuid,
+   visit_date  date,
+   description text,
+   PRIMARY KEY ((pet_id), visit_id)
+);
+
+CREATE TABLE IF NOT EXISTS petclinic_reference_lists (
+  list_name text,
+  values set<text>,
+  PRIMARY KEY ((list_name))
+);
+
+/** We could search veterinarians by their names. */
+CREATE INDEX IF NOT EXISTS petclinic_idx_ownername ON petclinic_owner(last_name);
+/** We could search vet by their names. */
+CREATE INDEX IF NOT EXISTS petclinic_idx_vetname ON petclinic_vet(last_name);
+```
+
+#### ✅ 5c. Check our 6 tables
+
+```sql
+describe tables;
+```
+
+#### ✅ 5d. Insert Reference Data
+
+```sql
+INSERT INTO petclinic_reference_lists(list_name, values)
+VALUES ('pet_type ', {'bird', 'cat', 'dog', 'lizard','hamster','snake'});
+
+INSERT INTO petclinic_reference_lists(list_name, values)
+VALUES ('vet_specialty', {'radiology', 'dentistry', 'surgery'});
 ```
 
 [🏠 Back to Table of Contents](#-table-of-content)

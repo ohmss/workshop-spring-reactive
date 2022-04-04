@@ -2,8 +2,36 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
+  # ------------------------------------
+  # SETUP CQLSH 
+  # ------------------------------------
+  - name: setup-cqlsh
+    env:
+        CQLENG_ALLOW_SCHEMA_MANAGEMENT: 1
+    before: |
+      mkdir /workspace/workshop-spring-reactive/tools
+      cd /workspace/workshop-spring-reactive/tools
+      wget https://downloads.datastax.com/enterprise/cqlsh-astra.tar.gz \
+          && tar xvzf cqlsh-astra.tar.gz \
+          && rm -f cqlsh-astra.tar.gz
+      clear
+      cd /workspace/workshop-spring-reactive
+      chmod 700 /workspace/workshop-spring-reactive/cqlsh
+    command: |
+      clear
+      cd /workspace/workshop-spring-reactive
+      npm exec astra-setup workshops spring_petclinic
+      clear
+      set -a
+      source .env
+      set +a
+
+  # ------------------------------------
+  # SETUP USER INTERFACE
+  # ------------------------------------
   - name: spring-petclinic-angular
     init: |
+      gp open README.md
       cd /workspace/workshop-spring-reactive/spring-petclinic-angular
       npm install --silent
       npm run build --silent
@@ -11,7 +39,6 @@ tasks:
       cd /workspace/workshop-spring-reactive/spring-petclinic-angular
       echo "export const environment = {production: false, REST_API_URL: '$(gp url 9966)/petclinic/api/'};" > /workspace/workshop-spring-reactive/spring-petclinic-angular/src/environments/environment.ts 
     env:
-      # suppress the "Would you like to share anonymous usage data with the Angular Team at Google under Google’s Privacy Policy" message.
       NG_CLI_ANALYTICS: ci
   - name: spring-petclinic-reactive
     command: |
@@ -38,5 +65,7 @@ github:
 
 vscode:
   extensions:
-    - Pivotal.vscode-spring-boot@1.22.0:NtlGb5ygHm2uP5qeqfVrCA==
-    - cool2k.vscode-lombok@1.0.2:e816/wZO588Jp8PN58Wj6g==
+    - cool2k.vscode-lombok
+    - datastax.astra-for-vs-code
+    - vscjava.vscode-java-pack
+    - Pivotal.vscode-boot-dev-pack
