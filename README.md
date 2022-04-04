@@ -94,15 +94,13 @@ we have you covered. In this repository, you'll find everything you need for thi
 - [Datastax Developers Discord chat](https://bit.ly/cassandra-workshop)
 - [Questions and Answers](https://community.datastax.com/)
 
-[🏠 Back to Table of Contents](#-table-of-content)
-
 ## 4. Create Astra DB Instance
 
 #### ✅ 4a.Register or Sign to Astra
 
 > 📖 DOCUMENTATION: [How to create an Astra Account](https://awesome-astra.github.io/docs/pages/astra/create-account/)
 
-[![](https://dabuttonfactory.com/button.png?t=+Connect+to+Astra&f=Open+Sans-Bold&ts=12&tc=fff&hp=23&vp=16&c=11&bgt=gradient&bgc=0b5394&ebgc=073763)]()
+[![](https://dabuttonfactory.com/button.png?t=+Connect+to+Astra&f=Open+Sans-Bold&ts=12&tc=fff&hp=23&vp=16&c=11&bgt=gradient&bgc=0b5394&ebgc=073763)](https://astra.dev/4-6)
 
 #### ✅ 4c.Create a Database (or resume your database)
 
