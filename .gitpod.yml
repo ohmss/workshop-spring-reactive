@@ -20,7 +20,7 @@ tasks:
     command: |
       clear
       cd /workspace/workshop-spring-reactive
-      npm exec astra-setup workshops spring_petclinic
+      npm exec -y astra-setup workshops spring_petclinic
       clear
       set -a
       source .env

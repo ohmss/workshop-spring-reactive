@@ -118,8 +118,6 @@ Use the following values:
 
 ![image](doc/img/astra-create-db.gif?raw=true)
 
-[🏠 Back to Table of Contents](#-table-of-content)
-
 ## 5. Create Astra Token
 
 To connect to the database from Java code we need some credentials, this is what we are going to do here.
