@@ -316,47 +316,21 @@ As of now **nothing IS running** but if you want to open a preview or a new brow
 
 ![image](doc/img/gitpod-preview.png?raw=true)
 
-#### ✅ 7c. Setup your application
+#### ✅ 6e. Validate your setup
 
-Locate the File `application.yaml` in the folder `src/main/resources`, there your 3 properties that need to be updated marked with `CHANGE_ME`.
-
-- Open the file
+- All variables you will need are in file called `.env `. We will source this file to define the env variables when needed.
 
 ```bash
- gp open /workspace/workshop-spring-reactive/src/main/resources/application.yml
+cat /workspace/workshop-spring-reactive/.env
 ```
-
-- Edit the lines with the `CHANGE_ME` to include the database properties.
-
-```yaml
-# Enforce listening on port 9966
-server:
-  port: 9966
-
-# Setup your application
-astra:
-  application-token: <CHANGE_ME>
-  database-id: <CHANGE_ME>
-  database-region: <CHANGE_ME>
-  keyspace: spring_petclinic
-  metrics:
-    enabled: false
-```
-
-- _The DatabaseID is located on the home page_
-  ![Pet Clinic Welcome Screen](doc/img/astra-config-1.png?raw=true)
-
-- _The Database region (and keyspace) are located in the details page_
-  ![Pet Clinic Welcome Screen](doc/img/astra-config-2.png?raw=true)
-
-- _Make sure the Token looks something like (with AstraCS: preceeding `AstraCS:xxxxxxxxxxx:yyyyyyyyyyy`_
-
-#### ✅ 7d. Validate your setup
 
 Take a look at the code of [`Test01_Connectivity`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test01_Connectivity.java) here we use the `CqlSession` and `AstraClient` to show some infromation regarding your Astra DB. Execute the test with:
 
 ```bash
 cd /workspace/workshop-spring-reactive
+set -a
+source /workspace/workshop-spring-reactive/.env
+set +a
 mvn test -Dtest=com.datastax.workshop.petclinic.Test01_Connectivity
 ```
 
@@ -373,35 +347,30 @@ mvn test -Dtest=com.datastax.workshop.petclinic.Test01_Connectivity
 workshops : id=3ed83de7-d97f-4fb6-bf9f-82e9f7eafa23, region=eu-west-1
 ```
 
-[🏠 Back to Table of Contents](#-table-of-content)
+You are all set.
 
-## 5. Create your schema with CQL Console
+## 7. Create your schema with CQL Console
 
-#### ✅ 5a. Select keyspace in CQL Console
+#### ✅ 7a. Open cqlSH Console
 
-As seen in the slides on the contrary of relational you start with the request and data model BEFORE CODING.
+```
+set -a
+source /workspace/workshop-spring-reactive/.env
+set +a
+/workspace/workshop-spring-reactive/cqlsh
+```
 
-Let's start with the CQL console for the database as whown below.
-
-![image](doc/img/db-cqlconsole-1.png?raw=true)
-
-Next, let's create the tables. In the CQL console use the command:
+#### ✅ 7b. Use the proper keyspace
 
 ```sql
 use spring_petclinic;
 ```
 
-![image](doc/img/db-cqlconsole-2.png?raw=true)
-
-#### ✅ 5b. Create tables
-
-Following is the data model we are looking for with 6 tables.
-
-![Pet Clinic Welcome Screen](doc/img/data-model.png?raw=true)
-
-Execute the following in the cql console
+#### ✅ 7c. Create your objects
 
 ```sql
+use spring_petclinic;
+
 DROP INDEX IF EXISTS petclinic_idx_vetname;
 DROP INDEX IF EXISTS petclinic_idx_ownername;
 DROP TABLE IF EXISTS petclinic_vet;
@@ -427,7 +396,6 @@ CREATE TABLE IF NOT EXISTS petclinic_vet_by_specialty (
  last_name   text,
  PRIMARY KEY ((specialty), vet_id)
 );
-
 
 CREATE TABLE IF NOT EXISTS petclinic_owner (
   id         uuid,
@@ -468,13 +436,13 @@ CREATE INDEX IF NOT EXISTS petclinic_idx_ownername ON petclinic_owner(last_name)
 CREATE INDEX IF NOT EXISTS petclinic_idx_vetname ON petclinic_vet(last_name);
 ```
 
-#### ✅ 5c. Check our 6 tables
+#### ✅ 7d. Check our 6 tables
 
 ```sql
 describe tables;
 ```
 
-#### ✅ 5d. Insert Reference Data
+#### ✅ 7e. Insert Reference Data
 
 ```sql
 INSERT INTO petclinic_reference_lists(list_name, values)
@@ -483,8 +451,6 @@ VALUES ('pet_type ', {'bird', 'cat', 'dog', 'lizard','hamster','snake'});
 INSERT INTO petclinic_reference_lists(list_name, values)
 VALUES ('vet_specialty', {'radiology', 'dentistry', 'surgery'});
 ```
-
-[🏠 Back to Table of Contents](#-table-of-content)
 
 ## 8. Working with Cassandra Drivers
 
