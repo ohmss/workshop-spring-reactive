@@ -9,7 +9,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import com.datastax.workshop.petclinic.vet.VetSpecialty;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class Test05_ApiController {
+public class Test06_ApiController {
     
     @Autowired
     WebTestClient webClient;

@@ -15,31 +15,23 @@ import com.datastax.oss.driver.api.mapper.annotations.PartitionKey;
  * @author Cedrick LUNVEN (@clunven)
 */
 @Entity
-@CqlName(VetEntity.VET_TABLE)
-public class VetEntity implements Serializable {
+@CqlName(VetTableDefinition.TABLE_NAME)
+public class VetEntity implements VetTableDefinition, Serializable {
 
     /** Serial. */
     private static final long serialVersionUID = 7407715795842376538L;
-    
-    /** Groups Constant. */
-    public static final String VET_TABLE            = "petclinic_vet";
-    public static final String VET_ATT_ID           = "id";
-    public static final String VET_ATT_LASTNAME     = "last_name";
-    public static final String VET_ATT_FIRSTNAME    = "first_name";
-    public static final String VET_ATT_SPECIALTIES  = "specialties";
-    public static final String VET_IDX_NAME         = "petclinic_idx_vetname";
-
+  
     @PartitionKey
-    @CqlName(VET_ATT_ID)
+    @CqlName(COLUMN_ID)
     private UUID id;
 
-    @CqlName(VET_ATT_FIRSTNAME)
+    @CqlName(COLUMN_FIRST_NAME)
     private String firstName;
 
-    @CqlName(VET_ATT_LASTNAME)
+    @CqlName(COLUMN_LAST_NAME)
     private String lastName;
     
-    @CqlName(VET_ATT_SPECIALTIES)
+    @CqlName(COLUMN_SPECIALTIES)
     private Set<String> specialties = new HashSet<>();  
         
     /**

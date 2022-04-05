@@ -20,6 +20,7 @@ import com.datastax.workshop.petclinic.pet.db.PetEntity;
 import com.datastax.workshop.petclinic.vet.Vet;
 import com.datastax.workshop.petclinic.vet.VetSpecialty;
 import com.datastax.workshop.petclinic.vet.db.VetEntity;
+import com.datastax.workshop.petclinic.vet.springdata.VetEntitySpring;
 import com.datastax.workshop.petclinic.visit.Visit;
 
 /**
@@ -78,12 +79,34 @@ public class MappingUtils {
         return v;
     }
     
+    public static Vet mapEntitySpringAsVet(@NotNull VetEntitySpring dto) {
+        Vet v = new Vet();
+        v.setId(dto.getId());
+        v.setFirstName( dto.getFirstName());
+        v.setLastName(dto.getLastName());
+        v.setSpecialties(dto.getSpecialties()
+                   .stream()
+                   .map(VetSpecialty::new)
+                   .collect(Collectors.toSet()));
+        return v;
+    }
+    
+    
+    
     public static VetEntity mapVetAsEntity(@NotNull Vet vet) {
        return new VetEntity(vet.getId(), vet.getFirstName(), vet.getLastName(), 
                 vet.getSpecialties().stream()
                           .map(VetSpecialty::getName)
                           .collect(Collectors.toSet()));
     }
+    
+    public static VetEntitySpring mapVetAsEntitySpring(@NotNull Vet vet) {
+        return new VetEntitySpring(vet.getId(), vet.getFirstName(), vet.getLastName(), 
+                 vet.getSpecialties().stream()
+                           .map(VetSpecialty::getName)
+                           .collect(Collectors.toSet()));
+     }
+    
     
     /**
      * Working with PET business domain.

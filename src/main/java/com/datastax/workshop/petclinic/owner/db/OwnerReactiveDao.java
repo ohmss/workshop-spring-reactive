@@ -1,7 +1,6 @@
 package com.datastax.workshop.petclinic.owner.db;
 
 import static com.datastax.oss.driver.api.mapper.entity.saving.NullSavingStrategy.DO_NOT_SET;
-import static com.datastax.workshop.petclinic.owner.db.OwnerEntity.OWNER_ATT_LASTNAME;
 
 import java.util.UUID;
 
@@ -29,7 +28,7 @@ import reactor.core.publisher.Flux;
 @Dao
 @Validated
 @DefaultNullSavingStrategy(DO_NOT_SET)
-public interface OwnerReactiveDao {
+public interface OwnerReactiveDao extends OwnerTableDefinition {
     
     /**
      * Find an owner by its unique identifier.
@@ -53,7 +52,7 @@ public interface OwnerReactiveDao {
      * Retrieve all owners matching the last_name clause. As this column
      * is not part of the primary key a secondary index has been created.
      */
-    @Select(customWhereClause = OWNER_ATT_LASTNAME + "= :ownerLastname")
+    @Select(customWhereClause = COLUMN_LASTNAME + "= :ownerLastname")
     Flux<OwnerEntity> searchByOwnerName(String ownerLastname);
     
     /**

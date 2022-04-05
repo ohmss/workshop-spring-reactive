@@ -8,41 +8,61 @@ import org.springframework.data.cassandra.core.mapping.CassandraType;
 import org.springframework.data.cassandra.core.mapping.Column;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 import org.springframework.data.cassandra.core.mapping.Table;
+
+import com.datastax.workshop.petclinic.vet.db.VetTableDefinition;
+
 import org.springframework.data.cassandra.core.mapping.CassandraType.Name;
 
-
-@Table(VetEntitySpring.VET_TABLE)
-public class VetEntitySpring {
-    
-    /** Groups Constant. */
-    public static final String VET_TABLE            = "petclinic_vet";
-    public static final String VET_ATT_ID           = "id";
-    public static final String VET_ATT_LASTNAME     = "last_name";
-    public static final String VET_ATT_FIRSTNAME    = "first_name";
-    public static final String VET_ATT_SPECIALTIES  = "specialties";
-    public static final String VET_IDX_NAME         = "petclinic_idx_vetname";
+/**
+ * Entity to map the Table petclinic_vet with a bean.
+ *
+ * @author Cedrick LUNVEN (@clunven)
+ */
+@Table(VetTableDefinition.TABLE_NAME)
+public class VetEntitySpring implements VetTableDefinition {
     
     @PrimaryKey
-    @Column(VET_ATT_ID)
+    @Column(COLUMN_ID)
     private UUID id;
 
-    @Column(VET_ATT_FIRSTNAME)
+    @Column(COLUMN_FIRST_NAME)
     private String firstName;
 
-    @Column(VET_ATT_LASTNAME)
+    @Column(COLUMN_LAST_NAME)
     @CassandraType(type = CassandraType.Name.TEXT)
     private String lastName;
     
-    @Column(VET_ATT_SPECIALTIES)
+    @Column(COLUMN_SPECIALTIES)
     @CassandraType(type = CassandraType.Name.SET, typeArguments = Name.TEXT)
     private Set<String> specialties = new HashSet<>(); 
     
+    /**
+     * Default Constructor
+     */
     public VetEntitySpring() {}
     
+    /**
+     * Constructor with Primary KEY.
+     *      
+     * @param uid
+     *      primary key
+     */
     public VetEntitySpring(String uid) {
         this.id = UUID.fromString(uid);
     }
     
+    /**
+     * Full flege constructor.
+     *
+     * @param uid
+     *      identifier
+     * @param firstname
+     *      first name
+     * @param lastname
+     *      last name
+     * @param specialties
+     *      specialties
+     */
     public VetEntitySpring(String uid, String firstname, String lastname, String...specialties) {
        this(uid);
        this.firstName   = firstname;
@@ -50,6 +70,18 @@ public class VetEntitySpring {
        this.specialties = Set.of(specialties);
     }
     
+    /**
+     * Full flege constructor.
+     *
+     * @param uid
+     *      identifier
+     * @param firstname
+     *      first name
+     * @param lastname
+     *      last name
+     * @param specialties
+     *      specialties
+     */
     public VetEntitySpring(UUID uid, String firstname, String lastname, Set<String> specialties) {
         this.id          = uid;
         this.firstName   = firstname;

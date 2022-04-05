@@ -1,53 +1,94 @@
-package com.datastax.workshop.petclinic.owner.db;
+package com.datastax.workshop.petclinic.owner.springdata;
 
 import java.io.Serializable;
 import java.util.UUID;
 
-import com.datastax.oss.driver.api.mapper.annotations.CqlName;
-import com.datastax.oss.driver.api.mapper.annotations.Entity;
-import com.datastax.oss.driver.api.mapper.annotations.PartitionKey;
+import org.springframework.data.cassandra.core.mapping.CassandraType;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
+
+import com.datastax.oss.driver.api.core.cql.Row;
+import com.datastax.workshop.petclinic.owner.db.OwnerTableDefinition;
 
 /**
- * Represents an Owner (Owner) in the data access layer (Cassandra)
+ * Entity to map the Table petclinic_vet with a bean.
+ *
+ * @author Cedrick LUNVEN (@clunven)
  */
-@Entity
-@CqlName(OwnerTableDefinition.TABLE_NAME)
-public class OwnerEntity implements OwnerTableDefinition, Serializable {
-
-    /** Serial.*/
-    private static final long serialVersionUID = 313944474970753001L;
+@Table(OwnerTableDefinition.TABLE_NAME)
+public class OwnerEntitySpring implements OwnerTableDefinition, Serializable {
     
-    @PartitionKey
-    @CqlName(COLUMN_ID)
+    /** Serial Number. */
+    private static final long serialVersionUID = 5469961645441103854L;
+
+    @PrimaryKey
+    @Column(COLUMN_ID)
     private UUID id;
 
-    @CqlName(COLUMN_FIRSTNAME)
+    @Column(COLUMN_FIRSTNAME)
     private String firstName;
 
-    @CqlName(COLUMN_LASTNAME)
+    @Column(COLUMN_LASTNAME)
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String lastName;
-
-    @CqlName(COLUMN_ADDRESS)
+    
+    @Column(COLUMN_ADDRESS)
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String address;
 
-    @CqlName(COLUMN_CITY)
+    @Column(COLUMN_CITY)
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String city;
     
-    @CqlName(COLUMN_TELEPHONE)
+    @Column(COLUMN_TELEPHONE)
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String telephone;
     
-    /** Default constructor. */
-    public OwnerEntity() {
+    /**
+     * Default Constructor
+     */
+    public OwnerEntitySpring() {}
+    
+    /**
+     * Constructor to TODO
+     * @param r
+     */
+    public OwnerEntitySpring(Row r) {
+        this.id = r.getUuid(COLUMN_ID);
+        this.firstName = r.getString(COLUMN_FIRSTNAME);
+        this.lastName = r.getString(COLUMN_LASTNAME);
+        this.address = r.getString(COLUMN_ADDRESS);
+        this.city = r.getString(COLUMN_CITY);
+        this.telephone = r.getString(COLUMN_TELEPHONE);
     }
     
-    /** Constructor with initialized identifier. */
-    public OwnerEntity(UUID uid) {
-        this.id = uid;
+    /**
+     * Constructor with Primary KEY.
+     *      
+     * @param uid
+     *      primary key
+     */
+    public OwnerEntitySpring(String uid) {
+        this.id = UUID.fromString(uid);
     }
     
-    /** Constructor with initialized identifier. */
-    public OwnerEntity(String uid) {
-        this(UUID.fromString(uid));
+    /**
+     * Full flege constructor.
+     *
+     * @param uid
+     *      identifier
+     * @param firstname
+     *      first name
+     * @param lastname
+     *      last name
+     * @param specialties
+     *      specialties
+     */
+    public OwnerEntitySpring(String uid, String firstname, String lastname) {
+       this(uid);
+       this.firstName   = firstname;
+       this.lastName    = lastname;
     }
 
     /**
@@ -163,5 +204,7 @@ public class OwnerEntity implements OwnerTableDefinition, Serializable {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
-
+    
+    
+    
 }

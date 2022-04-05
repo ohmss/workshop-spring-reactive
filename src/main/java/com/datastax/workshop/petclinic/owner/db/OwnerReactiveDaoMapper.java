@@ -3,14 +3,6 @@ package com.datastax.workshop.petclinic.owner.db;
 
 import static com.datastax.oss.driver.api.querybuilder.SchemaBuilder.createIndex;
 import static com.datastax.oss.driver.api.querybuilder.SchemaBuilder.createTable;
-import static com.datastax.workshop.petclinic.owner.db.OwnerEntity.OWNER_ATT_ADDRESS;
-import static com.datastax.workshop.petclinic.owner.db.OwnerEntity.OWNER_ATT_CITY;
-import static com.datastax.workshop.petclinic.owner.db.OwnerEntity.OWNER_ATT_FIRSTNAME;
-import static com.datastax.workshop.petclinic.owner.db.OwnerEntity.OWNER_ATT_ID;
-import static com.datastax.workshop.petclinic.owner.db.OwnerEntity.OWNER_ATT_LASTNAME;
-import static com.datastax.workshop.petclinic.owner.db.OwnerEntity.OWNER_ATT_TELEPHONE;
-import static com.datastax.workshop.petclinic.owner.db.OwnerEntity.OWNER_IDX_NAME;
-import static com.datastax.workshop.petclinic.owner.db.OwnerEntity.OWNER_TABLE;
 
 import com.datastax.oss.driver.api.core.CqlIdentifier;
 import com.datastax.oss.driver.api.core.CqlSession;
@@ -28,7 +20,7 @@ import com.datastax.oss.driver.api.mapper.annotations.Mapper;
  * - {@link https://docs.datastax.com/en/developer/java-driver/4.9/manual/mapper/}
  */
 @Mapper
-public interface OwnerReactiveDaoMapper {
+public interface OwnerReactiveDaoMapper extends OwnerTableDefinition {
 
     @DaoFactory
     OwnerReactiveDao ownerDao(@DaoKeyspace CqlIdentifier keyspace);
@@ -37,6 +29,7 @@ public interface OwnerReactiveDaoMapper {
      * Create objects required for this business domain (tables, index, udt) if they do not exist.
      */
     default void createSchema(CqlSession cqlSession) {
+        
         /**
          * CREATE TABLE IF NOT EXISTS petclinic_owner (
          *      id         uuid,
@@ -47,17 +40,18 @@ public interface OwnerReactiveDaoMapper {
          *      telephone  text,
          *      PRIMARY KEY ((id))
          *); */
-        cqlSession.execute(createTable(OWNER_TABLE).ifNotExists()
-                .withPartitionKey(OWNER_ATT_ID, DataTypes.UUID)
-                .withColumn(OWNER_ATT_FIRSTNAME, DataTypes.TEXT)
-                .withColumn(OWNER_ATT_LASTNAME, DataTypes.TEXT)
-                .withColumn(OWNER_ATT_ADDRESS, DataTypes.TEXT)
-                .withColumn(OWNER_ATT_CITY, DataTypes.TEXT)
-                .withColumn(OWNER_ATT_TELEPHONE, DataTypes.TEXT)
+        cqlSession.execute(createTable(TABLE_NAME).ifNotExists()
+                .withPartitionKey(COLUMN_ID, DataTypes.UUID)
+                .withColumn(COLUMN_FIRSTNAME, DataTypes.TEXT)
+                .withColumn(COLUMN_LASTNAME, DataTypes.TEXT)
+                .withColumn(COLUMN_ADDRESS, DataTypes.TEXT)
+                .withColumn(COLUMN_CITY, DataTypes.TEXT)
+                .withColumn(COLUMN_TELEPHONE, DataTypes.TEXT)
                 .build());
-        cqlSession.execute(createIndex(OWNER_IDX_NAME).ifNotExists()
-                .onTable(OWNER_TABLE)
-                .andColumn(OWNER_ATT_LASTNAME)
+        
+        cqlSession.execute(createIndex(INDEX_ON_NAME).ifNotExists()
+                .onTable(TABLE_NAME)
+                .andColumn(COLUMN_LASTNAME)
                 .build());
     }
 }

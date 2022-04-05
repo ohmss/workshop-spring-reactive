@@ -17,6 +17,8 @@ import com.datastax.workshop.petclinic.reflist.ReferenceListReactiveDao;
 import com.datastax.workshop.petclinic.utils.MappingUtils;
 import com.datastax.workshop.petclinic.vet.db.VetEntity;
 import com.datastax.workshop.petclinic.vet.db.VetReactiveDao;
+import com.datastax.workshop.petclinic.vet.springdata.VetEntitySpring;
+import com.datastax.workshop.petclinic.vet.springdata.VetReactiveCassandraRepository;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -38,19 +40,29 @@ public class VetReactiveServices implements InitializingBean {
     public Set<String> default_vet_specialties = new HashSet<>(
             Arrays.asList("dentistry", "radiology", "surgery"));
     
-    /** Implementation of Crud operations for vets. */
+    /** Implementation of Crud operations for vets (DAO). */
     private final VetReactiveDao vetDao;
+    
+    /** Implementation of Crud operations for vets. */
+    private final VetReactiveCassandraRepository vetRepositorySpring;
     
     /** Implementation of CRUD operations for references lists (here for vet specialties). */
     private ReferenceListReactiveDao refDao;
     
-    /**
-     * Constructor woith Implementations or Dao.
+    /** 
+     * Constructor with injections.
+     *
      * @param vetRepo
+     *      Driver DAO Mapping
+     * @param vetRepoSpring
+     *      Spring Data Mapping
+     * @param refDao
+     *      Reference list
      */
-    public VetReactiveServices(VetReactiveDao vetRepo, ReferenceListReactiveDao refDao) {
+    public VetReactiveServices(VetReactiveDao vetRepo, VetReactiveCassandraRepository vetRepoSpring, ReferenceListReactiveDao refDao) {
         this.vetDao = vetRepo;
         this.refDao  = refDao;
+        this.vetRepositorySpring = vetRepoSpring;
     }
     
     /**
@@ -72,17 +84,27 @@ public class VetReactiveServices implements InitializingBean {
         Mono.from(vetDao.upsert(new VetEntity("44444444-4444-4444-4444-444444444444", "Rafael", "Ortega", "surgery"))).subscribe();
         Mono.from(vetDao.upsert(new VetEntity("55555555-5555-5555-5555-555555555555", "Henry", "Stevens", "radiology"))).subscribe();
         Mono.from(vetDao.upsert(new VetEntity("66666666-6666-6666-6666-666666666666", "Sharon", "Jenkins"))).subscribe();
+        // Add a vet using Spring Data Cassandra
+        vetRepositorySpring.save(
+                new VetEntitySpring("77777777-7777-7777-7777-777777777777", "Spring", "Data", "radiology")).subscribe();
     }
     
     /**
-     * Retrieve all owners from the database.
+     * Retrieve all vets from the database.
      * 
      * @return
      *      a Flux (reactor) with the stream of Owners.
      */
     public Flux<Vet> findAllVets() {
-        return Flux.from(vetDao.findAll())
-                   .map(MappingUtils::mapEntityAsVet);  
+        return Flux.from(vetDao.findAll()).map(MappingUtils::mapEntityAsVet);  
+    }
+    
+    /**
+     * Retrieve all vets from the DB
+     * @return
+     */
+    public Flux<Vet> findAllVetsSpring() {
+        return vetRepositorySpring.findAll().map(MappingUtils::mapEntitySpringAsVet);  
     }
     
     /**
@@ -98,6 +120,11 @@ public class VetReactiveServices implements InitializingBean {
                    .map(MappingUtils::mapEntityAsVet);
     }
     
+    public Mono<Vet> findVetByIdSpring(@NotBlank String vetId) {
+        return Mono.from(vetRepositorySpring.findById(UUID.fromString(vetId)))
+                   .map(MappingUtils::mapEntitySpringAsVet);
+    }
+    
     public Mono< Vet> createVet(@NotNull Vet vet) {
         VetEntity ve = MappingUtils.mapVetAsEntity(vet);
         return Mono.from(vetDao.upsert(ve))
@@ -105,11 +132,19 @@ public class VetReactiveServices implements InitializingBean {
                    .map(MappingUtils::mapEntityAsVet);
     }
     
+    public Mono< Vet> createVetSpring(@NotNull Vet vet) {
+        VetEntitySpring ve = MappingUtils.mapVetAsEntitySpring(vet);
+        return Mono.from(vetRepositorySpring.save(ve))
+                   .map(rr -> ve)
+                   .map(MappingUtils::mapEntitySpringAsVet);
+    }
+    
     public Mono<Void> deleteVetById(@NotBlank String vetId) {
         return Mono.from(vetDao.delete(new VetEntity(vetId))).then();
-        //return Mono.from(vetDao.findById(vetId))
-        //           .map(vetDao::delete)
-        //           .then();
+    }
+    
+    public Mono<Void> deleteVetByIdSpring(@NotBlank String vetId) {
+        return Mono.from(vetRepositorySpring.delete(new VetEntitySpring(vetId))).then();
     }
     
     // --- Operations on Vet Specialties ---

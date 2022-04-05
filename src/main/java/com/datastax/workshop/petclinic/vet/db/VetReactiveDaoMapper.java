@@ -2,12 +2,6 @@ package com.datastax.workshop.petclinic.vet.db;
 
 import static com.datastax.oss.driver.api.querybuilder.SchemaBuilder.createIndex;
 import static com.datastax.oss.driver.api.querybuilder.SchemaBuilder.createTable;
-import static com.datastax.workshop.petclinic.vet.db.VetEntity.VET_ATT_FIRSTNAME;
-import static com.datastax.workshop.petclinic.vet.db.VetEntity.VET_ATT_ID;
-import static com.datastax.workshop.petclinic.vet.db.VetEntity.VET_ATT_LASTNAME;
-import static com.datastax.workshop.petclinic.vet.db.VetEntity.VET_ATT_SPECIALTIES;
-import static com.datastax.workshop.petclinic.vet.db.VetEntity.VET_IDX_NAME;
-import static com.datastax.workshop.petclinic.vet.db.VetEntity.VET_TABLE;
 
 import com.datastax.oss.driver.api.core.CqlIdentifier;
 import com.datastax.oss.driver.api.core.CqlSession;
@@ -25,7 +19,7 @@ import com.datastax.oss.driver.api.mapper.annotations.Mapper;
  * - {@link https://docs.datastax.com/en/developer/java-driver/4.9/manual/mapper/}
  */
 @Mapper
-public interface VetReactiveDaoMapper {
+public interface VetReactiveDaoMapper extends VetTableDefinition{
     
     @DaoFactory
     VetReactiveDao vetDao(@DaoKeyspace CqlIdentifier keyspace);
@@ -36,17 +30,17 @@ public interface VetReactiveDaoMapper {
     default void createSchema(CqlSession cqlSession) {
         
         cqlSession.execute(
-                createTable(VET_TABLE).ifNotExists()
-                .withPartitionKey(VET_ATT_ID, DataTypes.UUID)
-                .withColumn(VET_ATT_FIRSTNAME, DataTypes.TEXT)
-                .withColumn(VET_ATT_LASTNAME, DataTypes.TEXT)
-                .withColumn(VET_ATT_SPECIALTIES, DataTypes.setOf(DataTypes.TEXT))
+                createTable(TABLE_NAME).ifNotExists()
+                .withPartitionKey(COLUMN_ID, DataTypes.UUID)
+                .withColumn(COLUMN_FIRST_NAME, DataTypes.TEXT)
+                .withColumn(COLUMN_LAST_NAME, DataTypes.TEXT)
+                .withColumn(COLUMN_SPECIALTIES, DataTypes.setOf(DataTypes.TEXT))
                 .build());
         
         cqlSession.execute( 
-                createIndex(VET_IDX_NAME).ifNotExists()
-                .onTable(VET_TABLE)
-                .andColumn(VET_ATT_LASTNAME)
+                createIndex(INDEX_ON_NAME).ifNotExists()
+                .onTable(TABLE_NAME)
+                .andColumn(COLUMN_LAST_NAME)
                 .build());
     }
      
