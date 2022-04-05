@@ -20,6 +20,7 @@ cd /workspace/workshop-spring-reactive >> install-cqlsh.log
 echo -e "${GREEN}[OK]${NC} - We will now as you about your ASTRA TOKEN (AstraCS....)"
 
 cd /workspace/workshop-spring-reactive
+npm install --silent astra-setup
 npm exec -y astra-setup workshops spring_petclinic
 set -a
 source /workspace/workshop-spring-reactive/.env
