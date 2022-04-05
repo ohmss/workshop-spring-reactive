@@ -143,29 +143,110 @@ To connect to the database from Java code we need some credentials, this is what
 When you first launch gitpod, it builds the image.
 ![image](doc/img/building-workspace.png?raw=true)
 
-#### 📘 Home Screen
-
 This is the home Screen. It is a VSCode instance in the cloud. As you can see, notice multiple panels are open with 2 terminals, the readme and the explorer.
 
-![image](doc/img/gitpod-home.png?raw=true)
-
-#### ✅ 6b. Setup Gitpod
-
-Locate the 3 terminal panel on the bottom right hand corner.
-
-![cqlsh](doc/img/setup-cqlsh.png?raw=true)
-
-#### ✅ 7b. Know your gitpod
-
-- **📘 All tools are installed**
-
-Gitpod provides everything you need to work with JAVA, Node.JS (but also python, docker and many more). Open a new **TERMINAL** and enter the following command.
+#### ✅ 6b. Setup Cqlsh
 
 #### ⚠️ COPY-PASTE IN GITPOD
 
 > _Some browsers might block the CTRL+C and CRTL+V if that happen you can paste with right-click and paste._
 
 > _The first time you paste something in Gitpod your might have a pop-up telling you to accept the command_
+
+- There 3 terminal panel on the bottom right hand corner. The last `setup-cqlsh:bash` got the focus.
+
+![cqlsh](doc/img/setup-cqlsh.png?raw=true)
+
+- If you look at the terminal windows it is asking for your Astra TOKEN. Please enter the value of your Token it should look like `AstraCS....` then press enter.
+
+![image](doc/img/gitpod-home.png?raw=true)
+
+- The initialization will go on for you to get access to `CQLSH` directly.
+
+```
+------------------------------------------------------------
+--            Installation of Cqlsh                      ---
+------------------------------------------------------------
+
+[OK] - Tools folder has been created
+[OK] - Package has been downloaded
+[OK] - We will now as you about your ASTRA TOKEN (AstraCS....)
+Checking your credentials...
+
+Login to Astra at https://dstx.io/workshops
+After login, you can create a database.
+Click on your name in the left-hand column
+In the dropdown, select "Organization Settings"
+    Select "Token Management" from the left-hand column
+    Select "Database Administrator" in the Role dropdown
+    Click "Generate Token"
+    Save to CSV if you want to access it later
+✔ Please paste the Database Admin Token here
+***********
+Credentials set up, checking database
+Looking for workshops
+     workshops: Current status is ACTIVE
+         ... status is ACTIVE
+    existing workshops database found.
+Looking for spring_petclinic keyspace
+    keyspace spring_petclinic already exists
+Setting up secure bundle
+
+Deleted file: cqlshrc
+[OK] - Database ID is 3ed83de7-d97f-4fb6-bf9f-82e9f7eafa23
+[OK] - Database REGION is eu-west-1
+[OK] - Database TOKEN is ************
+Picked up JAVA_TOOL_OPTIONS:  -Xmx3435m
+[OK] - Secure Connect Bundle downloaded
+[OK] - Launching CQLSH....
+Connected to cndb at 127.0.0.1:9042.
+[cqlsh 6.8.0 | Cassandra 4.0.0.6816 | CQL spec 3.4.5 | Native protocol v4]
+Use HELP for help.
+token@cqlsh>
+```
+
+#### ✅ 6c. Validate CqlSH
+
+- You can now list the keyspaces (like oracle schemas) available.
+
+```sql
+describe keyspaces;
+```
+
+Output:
+
+```
+system_virtual_schema  system_auth   data_endpoint_auth  system_traces
+temporal_visibility    system_views  better_reads        ecommerce
+netflix                system        spring_petclinic    todos
+system_schema          datastax_sla  native_java         feeds_reader
+```
+
+- Select the keyspace we will work with today `spring_petclinic`
+
+```sql
+use spring_petclinic;
+```
+
+- You can quit wit
+
+```sql
+quit
+```
+
+- You can now open the console any time with
+
+```
+/workspace/workshop-spring-reactive/cqlsh
+```
+
+The other Terminal are dedicated for the frontend and the backend.
+
+#### ✅ 6d. Know your gitpod
+
+- **📘 All tools are installed**
+
+Gitpod provides everything you need to work with JAVA, Node.JS (but also python, docker and many more). Open a new **TERMINAL** and enter the following command.
 
 - Check Java Version
 
