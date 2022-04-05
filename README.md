@@ -132,27 +132,28 @@ To connect to the database from Java code we need some credentials, this is what
 
 ![image](doc/img/astra-create-token.gif?raw=true)
 
-> ⚠️ We will use the third argument called `TOKEN`, make sure you copy it in the clip board.
+> ⚠️ We will use the third argument called `TOKEN` that looks like `AstraCS:...` make sure you copy it in the clipboard.
 
 ### 6. Start and Setup Gitpod
+
+#### ✅ 6a. Open Gitpod
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datastaxdevs/workshop-spring-reactive)
 
 When you first launch gitpod, it builds the image.
 ![image](doc/img/building-workspace.png?raw=true)
 
-Gitpod pulls the image.
-![image](doc/img/pulling-image.png?raw=true)
-
 #### 📘 Home Screen
 
 This is the home Screen. It is a VSCode instance in the cloud. As you can see, notice multiple panels are open with 2 terminals, the readme and the explorer.
-![image](doc/img/start-ui.png?raw=true)
 
-#### 📘 How to open a new terminal
+![image](doc/img/gitpod-home.png?raw=true)
 
-You can open a new terminal from the menu in the ellipsis in the top left hand corner. Then use the Switch terminal panel to move from one to another.
-![image](doc/img/gitpod-new-terminal.png?raw=true)
+#### ✅ 6b. Setup Gitpod
+
+Locate the 3 terminal panel on the bottom right hand corner.
+
+![cqlsh](doc/img/setup-cqlsh.png?raw=true)
 
 #### ✅ 7b. Know your gitpod
 
