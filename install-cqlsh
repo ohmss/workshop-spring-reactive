@@ -10,24 +10,26 @@ echo -e "${BLUE}--            Installation of Cqlsh                      ---${NC
 echo -e "${BLUE}------------------------------------------------------------${NC}"
 echo -e " "
 mkdir /workspace/workshop-spring-reactive/tools 2>/dev/null
-echo -e "${GREEN}[OK]${NC} - Tools folder has been created
+echo -e "${GREEN}[OK]${NC} - Tools folder has been created"
 cd /workspace/workshop-spring-reactive/tools
-wget https://downloads.datastax.com/enterprise/cqlsh-astra.tar.gz \
-        && tar xvzf cqlsh-astra.tar.gz \
-        && rm -f cqlsh-astra.tar.gz 1>/dev/null
-echo -e "${GREEN}[OK]${NC} - Package has been downloaded
-cd /workspace/workshop-spring-reactive
-chmod 700 /workspace/workshop-spring-reactive/cqlsh 
-echo -e "${GREEN}[OK]${NC} - Permissions Set
+wget -q https://downloads.datastax.com/enterprise/cqlsh-astra.tar.gz >> install-cqlsh.log
+tar xvzf cqlsh-astra.tar.gz  >> install-cqlsh.log
+rm -f cqlsh-astra.tar.gz >> install-cqlsh.log
+echo -e "${GREEN}[OK]${NC} - Package has been downloaded"
+cd /workspace/workshop-spring-reactive >> install-cqlsh.log
+echo -e "${GREEN}[OK]${NC} - We will now as you about your ASTRA TOKEN (AstraCS....)"
 
 cd /workspace/workshop-spring-reactive
 npm exec -y astra-setup workshops spring_petclinic
 set -a
 source /workspace/workshop-spring-reactive/.env
 set +a
-mvn test -Dtest=com.datastax.workshop.petclinic.Test01_Connectivity > /dev/null
-echo -e "${GREEN}[OK]${NC} - Secure Connect Bundle downloaded
-echo -e "${GREEN}[OK]${NC} - Launching CQLSH....
+echo -e "${GREEN}[OK]${NC} - Database ID is ${BLUE}${ASTRA_DB_ID}${NC}"
+echo -e "${GREEN}[OK]${NC} - Database REGION is ${BLUE}${ASTRA_DB_REGION}${NC}"
+echo -e "${GREEN}[OK]${NC} - Database TOKEN is ${BLUE}${ASTRA_DB_ADMIN_TOKEN}${NC}"
+mvn test -Dtest=com.datastax.workshop.petclinic.Test01_Connectivity >> instal.log
+echo -e "${GREEN}[OK]${NC} - Secure Connect Bundle downloaded"
+echo -e "${GREEN}[OK]${NC} - Launching CQLSH...."
 ./cqlsh
 
 

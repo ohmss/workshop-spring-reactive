@@ -23,4 +23,7 @@ astra:
       advanced:
         connection:
           init-query-timeout: 10s
+          set-keyspace-timeout: 10s
+        control-connection:
+          timeout: 10s
           
