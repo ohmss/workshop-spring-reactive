@@ -25,7 +25,7 @@ This sample is a fully reactive version of the [Spring PetClinic](https://projec
 3. [Materials for the Session](#3-materials-for-the-session)
 4. [Create your Database](#4-create-astra-db-instance)
 5. [Create your Token](#5-create-astra-token)
-6. [Start and setup Gitpod](#6-start-gitpod-and-setup-your-application)
+6. [Start and setup Gitpod](#6-start-and-setup-gitpod)
 7. [Create your Schema](#7-create-your-schema-with-cql-console)
 8. [Working with Cassandra Drivers](#8-working-with-cassandra-drivers)
 9. [Working with Spring Data](#9-working-with-spring-data)
@@ -462,7 +462,7 @@ VALUES ('vet_specialty', {'radiology', 'dentistry', 'surgery'});
 
 #### ✅ 8a. The CqlSession
 
-- Take a look on configuration file `application.yml`.
+- Exist the CqlSH or open a new terminal to take a look on configuration file `application.yml`.
 
 ```bash
 gp open /workspace/workshop-spring-reactive/src/main/resources/application.yml
@@ -485,6 +485,9 @@ gp open gp open /workspace/workshop-spring-reactive/src/test/java/com/datastax/w
 - Execute the test with the following:
 
 ```bash
+set -a
+source /workspace/workshop-spring-reactive/.env
+set +a
 mvn test -Dtest=com.datastax.workshop.petclinic.Test02_DaoWithCqlSession
 ```
 
@@ -548,8 +551,6 @@ Now execute the test to work with the DAO `Test03_DaoWithDriverObjectMapping`
 ```bash
 mvn test -Dtest=com.datastax.workshop.petclinic.Test03_DaoWithDriverObjectMapping
 ```
-
-[🏠 Back to Table of Contents](#-table-of-content)
 
 ## 9. Working with Spring Data
 
@@ -727,6 +728,4 @@ Don't forget to complete your assignment and get your verified skill badge! Fini
 
 5. _(totally optional)_ Challenge for 🌶️🌶️🌶️ EXTRA SPICE 🌶️🌶️🌶️. Fork the project, change the code for more repositories to use Spring Data (replacing the Java drivers) and do a pull request. 👕 If the submission has a good quality we will ship a SWAG BOX for free.
 
-[🏠 Back to Table of Contents](#-table-of-content)
-
-Congratulations you made it to the END.
+Congratulations you made it to the END !!
