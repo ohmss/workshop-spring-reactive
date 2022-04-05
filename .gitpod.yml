@@ -2,18 +2,7 @@ image:
   file: .gitpod.Dockerfile
 
 tasks:
-  # --------------------------------------
-  #  SETUP CQLSH and Create DB Workshop
-  # --------------------------------------
-  - name: setup-cqlsh
-    env:
-        CQLENG_ALLOW_SCHEMA_MANAGEMENT: 1
-    before: |
-      chmod 700 /workspace/workshop-spring-reactive/install-cqlsh
-      chmod 700 /workspace/workshop-spring-reactive/cqlsh
-    command: |
-      ./install-cqlsh
-      ./cqlsh
+  
 
   # ------------------------------------
   # SETUP USER INTERFACE
@@ -32,6 +21,19 @@ tasks:
   - name: spring-petclinic-reactive
     command: |
      mvn clean
+  # --------------------------------------
+  #  SETUP CQLSH and Create DB Workshop
+  # --------------------------------------
+  - name: setup-cqlsh
+    env:
+        CQLENG_ALLOW_SCHEMA_MANAGEMENT: 1
+    before: |
+      chmod 700 /workspace/workshop-spring-reactive/install-cqlsh
+      chmod 700 /workspace/workshop-spring-reactive/cqlsh
+    command: |
+      ./install-cqlsh
+      ./cqlsh
+         
      
 ports:
   - port: 4200
