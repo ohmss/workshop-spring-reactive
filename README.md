@@ -324,7 +324,13 @@ As of now **nothing IS running** but if you want to open a preview or a new brow
 cat /workspace/workshop-spring-reactive/.env
 ```
 
-Take a look at the code of [`Test01_Connectivity`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test01_Connectivity.java) here we use the `CqlSession` and `AstraClient` to show some infromation regarding your Astra DB. Execute the test with:
+- Take a look at the code of [`Test01_Connectivity`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test01_Connectivity.java) here we use the `CqlSession` and `AstraClient` to show some infromation regarding your Astra DB.
+
+```
+gp open gp open /workspace/workshop-spring-reactive/src/test/java/com/datastax/workshop/petclinic/Test01_Connectivity.java
+```
+
+Execute the test with:
 
 ```bash
 cd /workspace/workshop-spring-reactive
@@ -456,7 +462,13 @@ VALUES ('vet_specialty', {'radiology', 'dentistry', 'surgery'});
 
 #### ✅ 8a. The CqlSession
 
-The integration to Cassandra is always implemented through the `CqlSession`. A first way to implement a DAO is to just use this object explicitly. Check the code at [`Test02_DaoWithCqlSession`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test02_DaoWithCqlSession.java) and run the following test:
+- Let us have a look on configuration file `application.yml`
+
+```bash
+gp open /workspace/workshop-spring-reactive/src/main/resources/application.yml
+```
+
+- The spring Configuration will have use load keys coming from `astra.*` and initialize the object `CqlSession`. The integration to Cassandra is always implemented through the `CqlSession`. A first way to implement a DAO is to just use this object explicitly. Check the code at [`Test02_DaoWithCqlSession`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test02_DaoWithCqlSession.java) and run the following test:
 
 ```bash
 mvn test -Dtest=com.datastax.workshop.petclinic.Test02_DaoWithCqlSession
