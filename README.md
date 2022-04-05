@@ -462,13 +462,27 @@ VALUES ('vet_specialty', {'radiology', 'dentistry', 'surgery'});
 
 #### ✅ 8a. The CqlSession
 
-- Let us have a look on configuration file `application.yml`
+- Take a look on configuration file `application.yml`.
 
 ```bash
 gp open /workspace/workshop-spring-reactive/src/main/resources/application.yml
 ```
 
-- The spring Configuration will have use load keys coming from `astra.*` and initialize the object `CqlSession`. The integration to Cassandra is always implemented through the `CqlSession`. A first way to implement a DAO is to just use this object explicitly. Check the code at [`Test02_DaoWithCqlSession`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test02_DaoWithCqlSession.java) and run the following test:
+- The spring Configuration will use load keys coming from `astra.*` and initialize the object `CqlSession`. A first way to implement a DAO is to use this object explicitly. Check the code at [`Test02_DaoWithCqlSession`](https://github.com/datastaxdevs/workshop-spring-reactive/blob/master/src/test/java/com/datastax/workshop/petclinic/Test02_DaoWithCqlSession.java)
+
+- Take a look at the `DAO` with `CqlSession`
+
+```bash
+ gp open /workspace/workshop-spring-reactive/src/main/java/com/datastax/workshop/petclinic/reflist/ReferenceListReactiveDao.java
+```
+
+- Test source code (invoking the dao)
+
+```bash
+gp open gp open /workspace/workshop-spring-reactive/src/test/java/com/datastax/workshop/petclinic/Test02_DaoWithCqlSession.java
+```
+
+- Execute the test with the following:
 
 ```bash
 mvn test -Dtest=com.datastax.workshop.petclinic.Test02_DaoWithCqlSession
