@@ -549,6 +549,9 @@ public interface VetReactiveDaoMapper {
 Now execute the test to work with the DAO `Test03_DaoWithDriverObjectMapping`
 
 ```bash
+set -a
+source /workspace/workshop-spring-reactive/.env
+set +a
 mvn test -Dtest=com.datastax.workshop.petclinic.Test03_DaoWithDriverObjectMapping
 ```
 
@@ -572,10 +575,21 @@ public interface VetRepositorySpring
 Execute the test to work with the DAO `Test04_DaoWithSpringData`
 
 ```bash
+set -a
+source /workspace/workshop-spring-reactive/.env
+set +a
 mvn test -Dtest=com.datastax.workshop.petclinic.Test04_DaoWithSpringData
 ```
 
-[🏠 Back to Table of Contents](#-table-of-content)
+Execute the test to work with the DAO `Test05_DaoWithSpringDataSimple`
+
+```bash
+set -a
+source /workspace/workshop-spring-reactive/.env
+set +a
+mvn test -Dtest=com.datastax.workshop.petclinic.Test05_DaoWithSpringDataSimple
+```
+
 
 ## 10. Working with Spring WebFlux
 
@@ -609,7 +623,10 @@ public class VetSpecialtyController {
 #### ✅ 10a. Execute the unit test
 
 ```bash
-mvn test -Dtest=com.datastax.workshop.petclinic.Test05_ApiController
+set -a
+source /workspace/workshop-spring-reactive/.env
+set +a
+mvn test -Dtest=com.datastax.workshop.petclinic.Test06_ApiController
 ```
 
 #### ✅ 10b. Start the application with Swagger UI
@@ -630,6 +647,9 @@ You can now go ahead and start the application. The application is listening on 
 Start the application;
 
 ```bash
+set -a
+source /workspace/workshop-spring-reactive/.env
+set +a
 mvn spring-boot:run
 ```
 
