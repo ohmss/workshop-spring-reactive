@@ -53,7 +53,6 @@
 		<dependency>
 			<groupId>com.datastax.oss</groupId>
 			<artifactId>java-driver-mapper-runtime</artifactId>
-			<version>${cassandra-java-driver.version}</version>
 		</dependency>
 		
 		<!-- Test -->
