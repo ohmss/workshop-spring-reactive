@@ -45,9 +45,9 @@ public class OwnerReactiveCassandraRepository extends SimpleReactiveCassandraRep
         this.reactiveCassandraTemplate = ops;
     }
     
-    
     /**
-     * Allows to TODO
+     * Custom method.
+     * 
      * @param ownerLastName
      * @return
      */
@@ -56,7 +56,7 @@ public class OwnerReactiveCassandraRepository extends SimpleReactiveCassandraRep
                                         .query(SimpleStatement
                                             .builder("SELECT * FROM " + TABLE_NAME + " WHERE " + COLUMN_LASTNAME  + "=?")
                                             .addPositionalValues(ownerLastName)
-                                            .build(), (row, rowNum) -> new OwnerEntitySpring(row));
+                                            .build(), (row, rownum) -> new OwnerEntitySpring(row));
     }
 
 }

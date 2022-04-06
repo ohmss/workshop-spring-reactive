@@ -24,9 +24,11 @@ public class OwnerEntitySpring implements OwnerTableDefinition, Serializable {
 
     @PrimaryKey
     @Column(COLUMN_ID)
+    @CassandraType(type = CassandraType.Name.UUID)
     private UUID id;
 
     @Column(COLUMN_FIRSTNAME)
+    @CassandraType(type = CassandraType.Name.TEXT)
     private String firstName;
 
     @Column(COLUMN_LASTNAME)
