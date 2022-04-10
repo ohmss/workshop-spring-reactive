@@ -138,7 +138,7 @@ To connect to the database from Java code we need some credentials, this is what
 
 #### ✅ 6a. Open Gitpod
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/datastaxdevs/workshop-spring-reactive)
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/ohmss/workshop-spring-reactive)
 
 When you first launch gitpod, it builds the image.
 ![image](doc/img/building-workspace.png?raw=true)
